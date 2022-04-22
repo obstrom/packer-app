@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Grommet} from "grommet";
-import {DarkModeButton} from "./components/DarkModeButton";
-import {HeaderBar} from "./components/HeaderBar";
+import {DarkModeButton} from "./controls/DarkModeButton";
+import {HeaderBar} from "./layout/HeaderBar";
 
 const theme = {
     global: {
