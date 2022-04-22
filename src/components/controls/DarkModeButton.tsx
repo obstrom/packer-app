@@ -11,10 +11,16 @@ export const DarkModeButton = ({ isDarkMode, handleClick }: DarkModeButtonProps)
 
     return (
         <Button
+            a11yTitle="Dark mode toggle"
             className={`dark-mode-button toggle-${currentMode.toLowerCase()}`}
             onClick={handleClick}
-        >
-            <Sun size="medium"/>
-        </Button>
+            hoverIndicator={true}
+            icon={<Sun size="medium"/>}
+            color={{
+                light: "light2",
+                dark: "dark2"
+            }}
+            plain={false}
+        />
     );
 };

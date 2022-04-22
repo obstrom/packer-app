@@ -5,7 +5,7 @@ export const HeaderBar = ({ children }: any) => {
         <Box
             direction="row"
             align="center"
-            background={{ dark: "primaryDark", light: "primaryLight" }}
+            background={{ light: "light1", dark: "dark1" }}
             justify="between"
             pad={{ left: 'medium', right: 'small', vertical: 'small' }}
             elevation="medium"

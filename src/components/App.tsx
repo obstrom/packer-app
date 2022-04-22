@@ -8,8 +8,10 @@ const theme = {
         colors: {
             bgLight: "#FFF",
             bgDark: "#242424",
-            primaryLight: "#d7c6ac",
-            primaryDark: "#181818"
+            light1: "#d7c6ac",
+            light2: "#9a8d78",
+            dark1: "#2a2a2a",
+            dark2: "#4b4b4b"
         },
         font: {
             family: 'Roboto',
