@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Grommet} from "grommet";
+import {Box, Footer, Grommet, Heading, Main} from "grommet";
 import {DarkModeButton} from "./controls/DarkModeButton";
 import {HeaderBar} from "./layout/HeaderBar";
 
@@ -31,10 +31,18 @@ function App() {
             themeMode={themeMode}
             background={{ light: "bgLight", dark: "bgDark" }}
         >
-            <HeaderBar>
-                <h1>Packer App</h1>
-                <DarkModeButton isDarkMode={darkMode} handleClick={() => setDarkMode(state => !state)} />
-            </HeaderBar>
+            <Box fill>
+                <HeaderBar>
+                    <Heading level="1" size="small">Packer App</Heading>
+                    <DarkModeButton isDarkMode={darkMode} handleClick={() => setDarkMode(state => !state)}/>
+                </HeaderBar>
+                <Main>
+                    <Heading level="2" size="small">Main stuff</Heading>
+                </Main>
+                <Footer>
+                    <Heading level="3" size="small">Footer</Heading>
+                </Footer>
+            </Box>
         </Grommet>
     );
 }
