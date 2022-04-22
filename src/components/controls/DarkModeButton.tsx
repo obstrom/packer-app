@@ -16,10 +16,6 @@ export const DarkModeButton = ({ isDarkMode, handleClick }: DarkModeButtonProps)
             onClick={handleClick}
             hoverIndicator={true}
             icon={<Sun size="medium"/>}
-            color={{
-                light: "light2",
-                dark: "dark2"
-            }}
             plain={false}
         />
     );

@@ -1,8 +1,8 @@
-import {Box} from "grommet";
+import {Header} from "grommet";
 
 export const HeaderBar = ({ children }: any) => {
     return (
-        <Box
+        <Header
             direction="row"
             align="center"
             background={{ light: "light1", dark: "dark1" }}
@@ -12,6 +12,6 @@ export const HeaderBar = ({ children }: any) => {
             style={{ zIndex: '1' }}
         >
             {children}
-        </Box>
+        </Header>
     );
 };
