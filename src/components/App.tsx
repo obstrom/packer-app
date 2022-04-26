@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 import {Box, Footer, Grommet, Header, Heading, Main, Paragraph, Text} from "grommet";
 
 import {DarkModeButton} from "./controls/DarkModeButton";
-import {SetupSection} from "./setup/SetupSection";
+import {ContainersSection} from "./setup/ContainersSection";
 import {SiteLogo} from "./element/SiteLogo";
+import {AddContainerFormModal} from "./setup/AddContainerFormModal";
+import {ItemsSection} from "./setup/ItemsSection";
 
 // TODO - https://github.com/pmndrs/react-three-fiber
 
@@ -45,8 +47,8 @@ function App() {
                 </Header>
                 <Main pad={{horizontal: "large", top: "small"}} width="xlarge" alignSelf="center">
                     <Heading level="2" size="small" style={{fontWeight: "600"}}>Setup</Heading>
-                    <SetupSection title="Containers" typeName="container" />
-                    <SetupSection title="Items" typeName="item" />
+                    <ContainersSection />
+                    <ItemsSection />
                     <Heading level="2" size="small" style={{fontWeight: "600"}}>Results</Heading>
                 </Main>
                 <Footer justify="center" margin={{vertical: "large"}}>

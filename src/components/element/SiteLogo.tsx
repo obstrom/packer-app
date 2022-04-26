@@ -16,7 +16,7 @@ export const SiteLogo = () => {
                 margin={{left: "small"}}
                 style={{fontWeight: "900", userSelect: "none"}}
             >
-                PackMe
+                PackIt
             </Heading>
         </Box>
     );
