@@ -1,15 +1,17 @@
 import {Box, Button, Form, Heading, Layer, Select, TextInput} from "grommet";
 import {AddButton} from "../controls/AddButton";
 import {TrashButton} from "../controls/TrashButton";
-import {useState} from "react";
+import {Dispatch, SetStateAction, useState} from "react";
 import {Close} from "grommet-icons";
+import {Item} from "../../common/types";
 
 type ItemsSectionProps = {
-    amount?: number
+    items: Array<Item>,
+    setItems: Dispatch<SetStateAction<Array<Item>>>
 }
 
-export const ItemsSection = ({ amount = 0 }: ItemsSectionProps) => {
-    const [showModal, setShowModal] = useState(false);
+export const ItemsSection = ({ items, setItems }: ItemsSectionProps) => {
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     const openModal = () => setShowModal(true);
     const closeModal = () => setShowModal(false);
@@ -28,7 +30,7 @@ export const ItemsSection = ({ amount = 0 }: ItemsSectionProps) => {
                 align="center"
             >
                 <Heading level="3" size="small" margin={{vertical: "none", left: "small"}}>
-                    {(amount > 0) ? `Items (${amount})` : "Items"}
+                    {(items.length) ? `Items (${items.length})` : "Items"}
                 </Heading>
                 <Box direction="row">
                     <AddButton handleOnClick={openModal} />

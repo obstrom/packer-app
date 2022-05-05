@@ -1,27 +1,42 @@
-import React, {useState} from 'react';
-import {Box, Button, Form, Heading, Layer, Select, FormField} from "grommet";
+import React, {Dispatch, SetStateAction, useState} from 'react';
+import {Box, Button, Form, Heading, Layer} from "grommet";
 import {Close} from "grommet-icons";
 
 import {FormTextFieldString} from "../controls/FormTextFieldString";
 import {FormTextFieldPositiveInteger} from "../controls/FormTextFieldPositiveInteger";
 import {FormSelectField} from "../controls/FormSelectField";
+import {Container} from "../../common/types";
+import {LengthUnits, WeightUnits, stringToLengthUnit, stringToWeightUnit} from "../../common/enums";
 
 type AddContainerFormModalProps = {
-    closeModal: () => void
+    closeModal: () => void,
+    containers: Array<Container>
+    setContainers: Dispatch<SetStateAction<Array<Container>>>
 }
 
-export const AddContainerFormModal = ({ closeModal }: AddContainerFormModalProps) => {
-    const [description, setDescription] = useState("");
-    const [width, setWidth] = useState("");
-    const [depth, setDepth] = useState("");
-    const [height, setHeight] = useState("");
-    const [lengthUnit, setLengthUnit] = useState("");
-    const [weight, setWeight] = useState("");
-    const [maxWeight, setMaxWeight] = useState("");
-    const [weightUnit, setWeightUnit] = useState("");
+export const AddContainerFormModal = ({ closeModal, containers, setContainers }: AddContainerFormModalProps) => {
+    const [descriptionInput, setDescriptionInput] = useState<string>("");
+    const [widthInput, setWidthInput] = useState<string>("");
+    const [depthInput, setDepthInput] = useState<string>("");
+    const [heightInput, setHeightInput] = useState<string>("");
+    const [weightInput, setWeightInput] = useState<string>("");
+    const [maxWeightInput, setMaxWeightInput] = useState<string>("");
+    const [lengthUnitInput, setLengthUnitInput] = useState<string>("mm");
+    const [weightUnitInput, setWeightUnitInput] = useState<string>("gram");
 
     const handleSubmit = () => {
-        console.log("sumbit")
+        const newContainer: Container = {
+            description: descriptionInput,
+            width: parseInt(widthInput),
+            depth: parseInt(depthInput),
+            height: parseInt(heightInput),
+            weight: parseInt(weightInput),
+            maxWeight: parseInt(maxWeightInput),
+            lengthUnit: stringToLengthUnit(lengthUnitInput) as LengthUnits,
+            weightUnit: stringToWeightUnit(weightUnitInput) as WeightUnits
+        }
+
+        setContainers([...containers, newContainer]);
     }
 
     return (
@@ -44,9 +59,9 @@ export const AddContainerFormModal = ({ closeModal }: AddContainerFormModalProps
                                 label="Description"
                                 name="description"
                                 placeholder="Identifier like name or description"
-                                value={description}
+                                value={descriptionInput}
                                 required={true}
-                                setValue={setDescription}
+                                setValue={setDescriptionInput}
                             />
                         </Box>
                     </Box>
@@ -56,27 +71,27 @@ export const AddContainerFormModal = ({ closeModal }: AddContainerFormModalProps
                             <FormTextFieldPositiveInteger
                                 name="width"
                                 label="Width"
-                                value={width}
+                                value={widthInput}
                                 required={true}
-                                setValue={setWidth}
+                                setValue={setWidthInput}
                             />
                         </Box>
                         <Box>
                             <FormTextFieldPositiveInteger
                                 name="depth"
                                 label="Depth"
-                                value={depth}
+                                value={depthInput}
                                 required={true}
-                                setValue={setDepth}
+                                setValue={setDepthInput}
                             />
                         </Box>
                         <Box>
                             <FormTextFieldPositiveInteger
                                 name="height"
                                 label="Height"
-                                value={height}
+                                value={heightInput}
                                 required={true}
-                                setValue={setHeight}
+                                setValue={setHeightInput}
                             />
                         </Box>
                         <Box flex="grow" direction="column">
@@ -84,9 +99,9 @@ export const AddContainerFormModal = ({ closeModal }: AddContainerFormModalProps
                                 label="Unit"
                                 placeholder="Select unit"
                                 options={["mm", "cm", "dm", "m"]}
-                                value={lengthUnit}
+                                value={lengthUnitInput}
                                 required={true}
-                                setUnit={setLengthUnit}
+                                setUnit={setLengthUnitInput}
                             />
                         </Box>
                     </Box>
@@ -96,18 +111,18 @@ export const AddContainerFormModal = ({ closeModal }: AddContainerFormModalProps
                             <FormTextFieldPositiveInteger
                                 label="Weight"
                                 name="weight"
-                                value={weight}
+                                value={weightInput}
                                 required={true}
-                                setValue={setWeight}
+                                setValue={setWeightInput}
                             />
                         </Box>
                         <Box>
                             <FormTextFieldPositiveInteger
                                 label="Max weight"
                                 name="maxWeight"
-                                value={maxWeight}
+                                value={maxWeightInput}
                                 required={true}
-                                setValue={setMaxWeight}
+                                setValue={setMaxWeightInput}
                             />
                         </Box>
                         <Box flex="grow">
@@ -115,9 +130,9 @@ export const AddContainerFormModal = ({ closeModal }: AddContainerFormModalProps
                                 label="Unit"
                                 placeholder="Select unit"
                                 options={["gram", "kg"]}
-                                value={weightUnit}
+                                value={weightUnitInput}
                                 required={true}
-                                setUnit={setWeightUnit}
+                                setUnit={setWeightUnitInput}
                             />
                         </Box>
                     </Box>
