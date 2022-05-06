@@ -1,23 +1,19 @@
 import {LengthUnits, WeightUnits} from "./enums";
 
-interface Bin {
+interface PackerObject {
     description: string,
     width: number,
     depth: number,
     height: number,
     weight: number,
-    maxWeight: number,
     lengthUnit: LengthUnits,
     weightUnit: WeightUnits
 }
 
-interface Item {
-    description: string,
-    width: number,
-    depth: number,
-    height: number,
-    weight: number,
-    quantity: number,
-    lengthUnit: LengthUnits,
-    weightUnit: WeightUnits
+interface Bin extends PackerObject {
+    maxWeight: number
+}
+
+interface Item extends PackerObject {
+    quantity: number
 }

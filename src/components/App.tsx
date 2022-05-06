@@ -1,27 +1,46 @@
 import React, {useState} from 'react';
+import styled from "styled-components";
+
+import Accordion from "react-bootstrap/Accordion";
+import Container from "react-bootstrap/Container";
 
 import {Bin, Item} from "../common/types";
-import styled from "styled-components";
 import {PageTitle} from "./elements/PageTitle";
-import {Form} from "react-bootstrap";
 import {AddForm} from "./AddForm";
+import {Col, Row} from "react-bootstrap";
+import {AddObjectContainer} from "./AddObjectFormFrame";
+import {ListPackerObjectFrame} from "./ListPackerObjectFrame";
 
 // TODO - https://github.com/pmndrs/react-three-fiber
 
 const AppContainer = styled.div`
-  background-color: #1e90ff;
+  background-color: #fff;
   min-width: 100vw;
   min-height: 100vh;
 `
 
+const SetupContainer = styled.div`
+  max-width: 720px;
+`
+
 function App() {
-    const [containers, setContainers] = useState<Array<Bin>>([]);
+    const [bins, setBins] = useState<Array<Bin>>([]);
     const [items, setItems] = useState<Array<Item>>([]);
 
     return (
         <AppContainer>
             <PageTitle text={"PackMe"} />
-            <AddForm setContainers={setContainers} setItems={setItems} />
+            <Container fluid="sm">
+                <Row>
+                    <Col>
+                        <AddObjectContainer setBins={setBins} setItems={setItems} />
+                    </Col>
+                    <Col>
+                        <ListPackerObjectFrame className="mb-2" headerTitle="Containers" packerObjects={bins} />
+                        <ListPackerObjectFrame className="mb-2" headerTitle="Items" packerObjects={items} />
+                    </Col>
+                </Row>
+            </Container>
         </AppContainer>
     );
 }
