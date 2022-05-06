@@ -1,7 +1,12 @@
 import React, {Dispatch, SetStateAction} from 'react';
-import Accordion from "react-bootstrap/Accordion";
 import {AddForm} from "./AddForm";
 import {Bin, Item} from "../common/types";
+import Container from "react-bootstrap/Container";
+import styled from "styled-components";
+
+const Frame = styled(Container)`
+  background: #e8e8e8;
+`;
 
 type AddObjectContainerProps = {
     setBins: Dispatch<SetStateAction<Array<Bin>>>
@@ -11,13 +16,9 @@ type AddObjectContainerProps = {
 
 export const AddObjectContainer = ({ setBins, setItems, className }: AddObjectContainerProps) => {
     return (
-        <Accordion className={className} defaultActiveKey="0">
-            <Accordion.Item eventKey="0">
-                <Accordion.Header>Add object</Accordion.Header>
-                <Accordion.Body>
-                    <AddForm setContainers={setBins} setItems={setItems} />
-                </Accordion.Body>
-            </Accordion.Item>
-        </Accordion>
+        <Frame className={className}>
+            <h3>Add object</h3>
+            <AddForm setContainers={setBins} setItems={setItems} />
+        </Frame>
     );
 };

@@ -33,7 +33,7 @@ function App() {
             <Container fluid="sm">
                 <Row>
                     <Col>
-                        <AddObjectContainer setBins={setBins} setItems={setItems} />
+                        <AddObjectContainer className="p-4 border rounded" setBins={setBins} setItems={setItems} />
                     </Col>
                     <Col>
                         <ListPackerObjectFrame className="mb-2" headerTitle="Containers" packerObjects={bins} />

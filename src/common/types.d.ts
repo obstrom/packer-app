@@ -17,3 +17,8 @@ interface Bin extends PackerObject {
 interface Item extends PackerObject {
     quantity: number
 }
+
+interface FormSelectOption {
+    text: string
+    value: string
+}
