@@ -1,6 +1,6 @@
 import {LengthUnits, WeightUnits} from "./enums";
 
-interface Container {
+interface Bin {
     description: string,
     width: number,
     depth: number,
