@@ -42,3 +42,8 @@ export const weightUnitToString = (weightUnit: WeightUnits) => {
         case WeightUnits.METRIC_KILOGRAM: return "kg";
     }
 }
+
+export const enum PackerObjectTypes {
+    BIN = "bin",
+    ITEM = "item"
+}

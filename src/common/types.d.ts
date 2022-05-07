@@ -1,6 +1,7 @@
 import {LengthUnits, WeightUnits} from "./enums";
 
 interface PackerObject {
+    uuid: string,
     description: string,
     width: number,
     depth: number,

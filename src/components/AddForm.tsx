@@ -1,30 +1,39 @@
 import React, {Dispatch, SetStateAction, useState} from 'react';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import Form from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 import {Bin, FormSelectOption, Item} from "../common/types";
+import {LengthUnits, stringToLengthUnit, stringToWeightUnit, WeightUnits} from "../common/enums";
+
 import {FormUnitNumberInput} from "./controls/FormUnitNumberInput";
 import {FormSelect} from "./controls/FormSelect";
-import {Button} from "react-bootstrap";
+import {FormTextInput} from "./controls/FormTextInput";
 
 type AddFormProps = {
-    setContainers: Dispatch<SetStateAction<Array<Bin>>>
+    bins: Array<Bin>
+    setBins: Dispatch<SetStateAction<Array<Bin>>>
+    items: Array<Item>
     setItems: Dispatch<SetStateAction<Array<Item>>>
 }
 
-export const AddForm = ({ setContainers, setItems }: AddFormProps) => {
+export const AddForm = ({ bins, setBins, items, setItems }: AddFormProps) => {
     const [formType, setFormType] = useState("bin");
     const [formData, setFormData] = useState({
+        description: "",
         width: 0,
         depth: 0,
         height: 0,
         weight: 0,
         maxWeight: 0,
         lengthUnit: "mm",
-        weightUnit: "gram"
+        weightUnit: "gram",
+        quantity: 1
     });
 
     const typeSelectOptions: Array<FormSelectOption> = [
@@ -44,16 +53,77 @@ export const AddForm = ({ setContainers, setItems }: AddFormProps) => {
         { value: "kg", text: "kilogram (kg)" }
     ];
 
+    const handleFormOnSubmit = (e: React.SyntheticEvent) => {
+        e.preventDefault();
+        handleAddButton();
+    }
+
+    const handleAddButton = () => {
+        if (formType === "bin") {
+            const newBin: Bin = {
+                uuid: uuidv4(),
+                description: formData.description,
+                width: formData.width,
+                depth: formData.depth,
+                height: formData.height,
+                weight: formData.weight,
+                maxWeight: formData.maxWeight,
+                lengthUnit: stringToLengthUnit(formData.lengthUnit) as LengthUnits,
+                weightUnit: stringToWeightUnit(formData.weightUnit) as WeightUnits,
+            }
+
+            setBins([... bins, newBin]);
+        }
+
+        if (formType === "item") {
+            const newItem: Item = {
+                uuid: uuidv4(),
+                description: formData.description,
+                width: formData.width,
+                depth: formData.depth,
+                height: formData.height,
+                weight: formData.weight,
+                quantity: formData.quantity,
+                lengthUnit: stringToLengthUnit(formData.lengthUnit) as LengthUnits,
+                weightUnit: stringToWeightUnit(formData.weightUnit) as WeightUnits,
+            }
+
+            setItems([... items, newItem]);
+        }
+    }
+
+    const handleResetButton = () => {
+        setFormData({
+            description: "",
+            width: 0,
+            depth: 0,
+            height: 0,
+            weight: 0,
+            maxWeight: 0,
+            lengthUnit: "mm",
+            weightUnit: "gram",
+            quantity: 1
+        });
+    }
+
     return (
-        <Form>
-            <FormSelect
-                controlId="typeSelect"
-                options={typeSelectOptions}
-                label="Select type"
-                onChange={(e) => setFormType(e.target.value)}
-                value={formType}
-                className="mb-4"
-            />
+        <Form onSubmit={handleFormOnSubmit}>
+            <Col className="mb-4">
+                <FormSelect
+                    controlId="typeSelect"
+                    options={typeSelectOptions}
+                    label="Select type"
+                    onChange={(e) => setFormType(e.target.value)}
+                    value={formType}
+                    className="mb-2"
+                />
+                <FormTextInput
+                    label="Description"
+                    controlId="inputDescription"
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, "description": e.target.value })}
+                />
+            </Col>
             <Col className="mb-4">
                 <h4>Dimensions</h4>
                 <Stack direction="horizontal" gap={2}>
@@ -124,9 +194,22 @@ export const AddForm = ({ setContainers, setItems }: AddFormProps) => {
                     </Col>
                 </Row>
             </Col>
+            {formType === "item" && <Col className="mb-4">
+                <h4>Amount</h4>
+                <Row>
+                    <Col>
+                        <FormUnitNumberInput
+                            label="Quantity"
+                            controlId="inputQuantity"
+                            value={formData.quantity}
+                            onChange={(e) => setFormData({ ...formData, "quantity": e.target.value })}
+                        />
+                    </Col>
+                </Row>
+            </Col>}
             <Col>
-                <Button>Add</Button>
-                <Button className="btn-secondary mx-2">Reset</Button>
+                <Button type="submit">Add</Button>
+                <Button className="btn-secondary mx-2" onClick={handleResetButton}>Reset</Button>
             </Col>
         </Form>
     );
