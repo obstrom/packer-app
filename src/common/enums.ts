@@ -59,4 +59,27 @@ export const weightUnitToString = (weightUnit: WeightUnits) => {
 export const enum PackerObjectTypes {
   BIN = "bin",
   ITEM = "item",
+  NONE = "",
 }
+
+export const stringToPackerObjectType = (key: string): PackerObjectTypes => {
+  switch (key) {
+    case "bin":
+      return PackerObjectTypes.BIN;
+    case "item":
+      return PackerObjectTypes.ITEM;
+    default:
+      return PackerObjectTypes.NONE;
+  }
+};
+
+export const packerObjectTypeToString = (type: PackerObjectTypes): string => {
+  switch (type) {
+    case PackerObjectTypes.BIN:
+      return "bin";
+    case PackerObjectTypes.ITEM:
+      return "item";
+    default:
+      return "";
+  }
+};

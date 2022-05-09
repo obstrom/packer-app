@@ -1,8 +1,20 @@
-import React, { Dispatch, SetStateAction } from "react";
-import { AddForm } from "./AddForm";
-import { Bin, Item } from "../common/types";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { PackerObjectForm } from "./form/PackerObjectForm";
+import { Bin, FormSelectOption, Item } from "../common/types";
 import Container from "react-bootstrap/Container";
 import styled from "styled-components";
+import { FormSelect } from "./controls/FormSelect";
+import {
+  PackerObjectTypes,
+  packerObjectTypeToString,
+  stringToPackerObjectType,
+} from "../common/enums";
+import {
+  convertFormDataToBinObject,
+  convertFormDataToItemObject,
+  PackerObjectFormData,
+  PackerObjectFormError,
+} from "../common/packerObjectForm";
 
 type AddObjectContainerProps = {
   bins: Array<Bin>;
@@ -16,6 +28,62 @@ const Frame = styled(Container)`
   background: #e8e8e8;
 `;
 
+export const DEFAULT_FORM_DATA: PackerObjectFormData = {
+  description: "",
+  width: "1",
+  depth: "1",
+  height: "1",
+  weight: "0",
+  maxWeight: "999999",
+  lengthUnit: "mm",
+  weightUnit: "gram",
+  quantity: "1",
+};
+
+export const DEFAULT_FORM_ERROR: PackerObjectFormError = {
+  description: false,
+  width: false,
+  depth: false,
+  height: false,
+  weight: false,
+  maxWeight: false,
+  lengthUnit: false,
+  weightUnit: false,
+  quantity: false,
+};
+
+const typeSelectOptions: Array<FormSelectOption> = [
+  { value: "bin", text: "Container" },
+  { value: "item", text: "Item" },
+];
+
+const submitFormAction = (
+  e: any,
+  formType: PackerObjectTypes,
+  formData: PackerObjectFormData,
+  formError: PackerObjectFormError,
+  bins: Array<Bin>,
+  setBins: Dispatch<SetStateAction<Array<Bin>>>,
+  items: Array<Item>,
+  setItems: Dispatch<SetStateAction<Array<Item>>>
+) => {
+  e.preventDefault();
+
+  if (!checkNoFormErrors(formError)) return;
+
+  if (formType === "bin") {
+    const newBin: Bin = convertFormDataToBinObject(formData);
+    setBins([...bins, newBin]);
+  } else if (formType === "item") {
+    const newItem: Item = convertFormDataToItemObject(formData);
+    setItems([...items, newItem]);
+  }
+};
+
+const checkNoFormErrors = (formError: PackerObjectFormError): boolean => {
+  return Object.values(formError).every((v) => v === false);
+};
+
 export const AddObjectContainer = ({
   bins,
   setBins,
@@ -23,14 +91,43 @@ export const AddObjectContainer = ({
   setItems,
   className,
 }: AddObjectContainerProps) => {
+  const [formType, setFormType] = useState(PackerObjectTypes.BIN);
+  const [formData, setFormData] = useState(DEFAULT_FORM_DATA);
+  const [formError, setFormError] = useState(DEFAULT_FORM_ERROR);
+
   return (
     <Frame className={className}>
-      <h3>Add object</h3>
-      <AddForm
-        bins={bins}
-        setBins={setBins}
-        items={items}
-        setItems={setItems}
+      <h3>Add packing object</h3>
+      {/* TODO - Type selection should be a button group, rather then a dropdown */}
+      <FormSelect
+        controlId="typeSelect"
+        options={typeSelectOptions}
+        label="Select type"
+        onChange={(e) => setFormType(stringToPackerObjectType(e.target.value))}
+        value={packerObjectTypeToString(formType)}
+        className="mb-2"
+      />
+      <PackerObjectForm
+        formType={formType}
+        formData={formData}
+        setFormData={setFormData}
+        formError={formError}
+        setFormError={setFormError}
+        submitButtonLabel="Add"
+        handleOnSubmit={(e: any) =>
+          submitFormAction(
+            e,
+            formType,
+            formData,
+            formError,
+            bins,
+            setBins,
+            items,
+            setItems
+          )
+        }
+        allowReset={true}
+        handleOnReset={() => setFormData(DEFAULT_FORM_DATA)}
       />
     </Frame>
   );
