@@ -22,6 +22,48 @@ type ListPackerObjectFrameProps = {
   className?: string;
 };
 
+const updatePackerObject = (
+  type: PackerObjectTypes,
+  packerObjects: Array<Bin> | Array<Item>,
+  setPackerObjects:
+    | Dispatch<SetStateAction<Array<Bin>>>
+    | Dispatch<SetStateAction<Array<Item>>>,
+  updatedObject: Bin | Item
+) => {
+  if (type === PackerObjectTypes.ITEM) {
+    updateItems(
+      packerObjects as Array<Item>,
+      setPackerObjects as Dispatch<SetStateAction<Array<Item>>>,
+      updatedObject as Item
+    );
+  } else if (type == PackerObjectTypes.BIN) {
+    updateBins(
+      packerObjects as Array<Bin>,
+      setPackerObjects as Dispatch<SetStateAction<Array<Bin>>>,
+      updatedObject as Bin
+    );
+  }
+};
+
+const updateBins = (
+  bins: Array<Bin>,
+  setBins: Dispatch<SetStateAction<Array<Bin>>>,
+  updatedBin: Bin
+) => {
+  setBins([...bins.filter((bin) => bin.uuid != updatedBin.uuid), updatedBin]);
+};
+
+const updateItems = (
+  items: Array<Item>,
+  setItems: Dispatch<SetStateAction<Array<Item>>>,
+  updatedItem: Item
+) => {
+  setItems([
+    ...items.filter((item) => item.uuid != updatedItem.uuid),
+    updatedItem,
+  ]);
+};
+
 export const ListPackerObjectFrame = ({
   headerTitle,
   packerObjectType,
@@ -55,7 +97,7 @@ export const ListPackerObjectFrame = ({
                   key={index}
                   type={packerObjectType}
                   object={object}
-                  handleEdit={() => null}
+                  handleEdit={updatePackerObject}
                   handleDelete={handlePackerObjectDelete}
                 />
               ))}

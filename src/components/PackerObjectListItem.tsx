@@ -1,6 +1,5 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import Stack from "react-bootstrap/Stack";
-import Badge from "react-bootstrap/Badge";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear, faTrashCan } from "@fortawesome/free-solid-svg-icons";
@@ -8,11 +7,19 @@ import { Bin, Item, PackerObject } from "../common/types";
 import { lengthUnitToString, PackerObjectTypes } from "../common/enums";
 import Button from "react-bootstrap/Button";
 import { QuantityBadge } from "./controls/QuantityBadge";
+import { EditObjectFormModal } from "./EditObjectFormModal";
 
 type PackerObjectBadgeProps = {
   object: Bin | Item;
   type: PackerObjectTypes;
-  handleEdit: (id: string) => void;
+  handleEdit: (
+    type: PackerObjectTypes,
+    packerObjects: Array<Bin> | Array<Item>,
+    setPackerObjects:
+      | Dispatch<SetStateAction<Array<Bin>>>
+      | Dispatch<SetStateAction<Array<Item>>>,
+    updatedObject: Bin | Item
+  ) => void;
   handleDelete: (id: string) => void;
   className?: string;
 };
@@ -22,6 +29,12 @@ const BadgeContainer = styled(Stack)`
   color: #fff;
 `;
 
+const renderDimensions = (o: PackerObject) => {
+  return `${o.width} x ${o.depth} x ${o.height} ${lengthUnitToString(
+    o.lengthUnit
+  )}`;
+};
+
 export const PackerObjectListItem = ({
   object,
   type,
@@ -29,11 +42,9 @@ export const PackerObjectListItem = ({
   handleDelete,
   className,
 }: PackerObjectBadgeProps) => {
-  const renderDimensions = (o: PackerObject) => {
-    return `${o.width} x ${o.depth} x ${o.height} ${lengthUnitToString(
-      o.lengthUnit
-    )}`;
-  };
+  const [showEditModal, setShowEditModal] = useState(false);
+  const handleModalClose = () => setShowEditModal(false);
+  const handleModalShow = () => setShowEditModal(true);
 
   return (
     <BadgeContainer
@@ -55,7 +66,7 @@ export const PackerObjectListItem = ({
           size="sm"
           className="me-2"
           variant="light"
-          onClick={() => handleEdit("")}
+          onClick={handleModalShow}
         >
           <FontAwesomeIcon icon={faGear} />
         </Button>
@@ -67,6 +78,13 @@ export const PackerObjectListItem = ({
           <FontAwesomeIcon icon={faTrashCan} />
         </Button>
       </div>
+      <EditObjectFormModal
+        show={showEditModal}
+        handleClose={handleModalClose}
+        type={type}
+        object={object}
+        setObject={handleEdit}
+      />
     </BadgeContainer>
   );
 };

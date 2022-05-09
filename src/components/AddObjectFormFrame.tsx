@@ -12,6 +12,8 @@ import {
 import {
   convertFormDataToBinObject,
   convertFormDataToItemObject,
+  DEFAULT_FORM_DATA,
+  DEFAULT_FORM_ERROR,
   PackerObjectFormData,
   PackerObjectFormError,
 } from "../common/packerObjectForm";
@@ -27,30 +29,6 @@ type AddObjectContainerProps = {
 const Frame = styled(Container)`
   background: #e8e8e8;
 `;
-
-export const DEFAULT_FORM_DATA: PackerObjectFormData = {
-  description: "",
-  width: "1",
-  depth: "1",
-  height: "1",
-  weight: "0",
-  maxWeight: "999999",
-  lengthUnit: "mm",
-  weightUnit: "gram",
-  quantity: "1",
-};
-
-export const DEFAULT_FORM_ERROR: PackerObjectFormError = {
-  description: false,
-  width: false,
-  depth: false,
-  height: false,
-  weight: false,
-  maxWeight: false,
-  lengthUnit: false,
-  weightUnit: false,
-  quantity: false,
-};
 
 const typeSelectOptions: Array<FormSelectOption> = [
   { value: "bin", text: "Container" },
