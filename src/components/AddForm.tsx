@@ -20,8 +20,8 @@ import {
 
 type AddFormProps = {
   bins: Array<Bin>;
-  setBins: Dispatch<SetStateAction<Array<Bin>>>;
   items: Array<Item>;
+  setBins: Dispatch<SetStateAction<Array<Bin>>>;
   setItems: Dispatch<SetStateAction<Array<Item>>>;
 };
 
