@@ -4,7 +4,7 @@ import { FormUnitNumberInput } from "../controls/FormUnitNumberInput";
 import {
   PackerObjectFormData,
   PackerObjectFormError,
-} from "../../common/packerObjectForm";
+} from "../../commons/packerObjectForm";
 
 type DimensionsFormSectionProps = {
   formData: PackerObjectFormData;

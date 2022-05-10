@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
-import { PackerObjectForm } from "./form/PackerObjectForm";
-import { Bin, FormSelectOption, Item } from "../common/types";
+import { PackerObjectForm } from "../form/PackerObjectForm";
+import { Bin, FormSelectOption, Item } from "../../commons/types";
 import Container from "react-bootstrap/Container";
 import styled from "styled-components";
-import { FormSelect } from "./controls/FormSelect";
+import { FormSelect } from "../controls/FormSelect";
 import {
   PackerObjectTypes,
   packerObjectTypeToString,
   stringToPackerObjectType,
-} from "../common/enums";
+} from "../../commons/enums";
 import {
   convertFormDataToNewBinObject,
   convertFormDataToNewItemObject,
@@ -16,11 +16,11 @@ import {
   DEFAULT_FORM_ERROR,
   PackerObjectFormData,
   PackerObjectFormError,
-} from "../common/packerObjectForm";
+} from "../../commons/packerObjectForm";
 import {
   PackerObjectContext,
   PackerObjectContextValue,
-} from "../context/PackerObjectContext";
+} from "../../contexts/PackerObjectContext";
 
 type AddObjectContainerProps = {
   className?: string;

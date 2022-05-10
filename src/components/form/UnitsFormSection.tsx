@@ -4,12 +4,12 @@ import { FormUnitNumberInput } from "../controls/FormUnitNumberInput";
 import {
   PackerObjectFormData,
   PackerObjectFormError,
-} from "../../common/packerObjectForm";
-import { PackerObjectTypes } from "../../common/enums";
+} from "../../commons/packerObjectForm";
+import { PackerObjectTypes } from "../../commons/enums";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { FormSelect } from "../controls/FormSelect";
-import { FormSelectOption } from "../../common/types";
+import { FormSelectOption } from "../../commons/types";
 
 type UnitsFormSectionProps = {
   formData: PackerObjectFormData;

@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import { FormSelectOption } from "../../common/types";
+import { FormSelectOption } from "../../commons/types";
 
 type FormSelectProps = {
   controlId: string;

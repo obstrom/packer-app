@@ -4,8 +4,8 @@ import { FormUnitNumberInput } from "../controls/FormUnitNumberInput";
 import {
   PackerObjectFormData,
   PackerObjectFormError,
-} from "../../common/packerObjectForm";
-import { PackerObjectTypes } from "../../common/enums";
+} from "../../commons/packerObjectForm";
+import { PackerObjectTypes } from "../../commons/enums";
 
 type WeightFormSectionProps = {
   formType: PackerObjectTypes;

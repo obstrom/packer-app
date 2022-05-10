@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import { PackerObjectTypes } from "../common/enums";
-import { PackerObjectForm } from "./form/PackerObjectForm";
-import { Bin, Item } from "../common/types";
+import { PackerObjectTypes } from "../../commons/enums";
+import { PackerObjectForm } from "./PackerObjectForm";
+import { Bin, Item } from "../../commons/types";
 import {
   convertBinObjectToFormData,
   convertFormDataToBinObject,
@@ -12,7 +12,7 @@ import {
   DEFAULT_FORM_ERROR,
   PackerObjectFormData,
   PackerObjectFormError,
-} from "../common/packerObjectForm";
+} from "../../commons/packerObjectForm";
 
 type EditObjectFormModalProps = {
   show: boolean;

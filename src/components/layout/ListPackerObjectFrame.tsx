@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import styled from "styled-components";
-import { PackerObjectListItem } from "./PackerObjectListItem";
-import { PackerObjectTypes } from "../common/enums";
-import { PackerObjectContext } from "../context/PackerObjectContext";
+import { PackerObjectListItem } from "../elements/PackerObjectListItem";
+import { PackerObjectTypes } from "../../commons/enums";
+import { PackerObjectContext } from "../../contexts/PackerObjectContext";
 
 const EmptyAccordionButton = styled.div`
   &:after {

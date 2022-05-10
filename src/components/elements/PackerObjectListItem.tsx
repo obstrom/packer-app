@@ -3,11 +3,11 @@ import Stack from "react-bootstrap/Stack";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { Bin, Item, PackerObject } from "../common/types";
-import { lengthUnitToString, PackerObjectTypes } from "../common/enums";
+import { Bin, Item, PackerObject } from "../../commons/types";
+import { lengthUnitToString, PackerObjectTypes } from "../../commons/enums";
 import Button from "react-bootstrap/Button";
-import { QuantityBadge } from "./controls/QuantityBadge";
-import { EditObjectFormModal } from "./EditObjectFormModal";
+import { QuantityBadge } from "../controls/QuantityBadge";
+import { EditObjectFormModal } from "../form/EditObjectFormModal";
 
 type PackerObjectBadgeProps = {
   object: Bin | Item;

@@ -1,6 +1,6 @@
 import React from "react";
 import Badge from "react-bootstrap/Badge";
-import { Item } from "../../common/types";
+import { Item } from "../../commons/types";
 
 type QuantityBadgeProps = {
   item: Item;

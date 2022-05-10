@@ -4,10 +4,10 @@ import Container from "react-bootstrap/Container";
 
 import { PageTitle } from "./elements/PageTitle";
 import { Col, Row } from "react-bootstrap";
-import { AddObjectContainer } from "./AddObjectFormFrame";
-import { ListPackerObjectFrame } from "./ListPackerObjectFrame";
-import { PackerObjectTypes } from "../common/enums";
-import { PackerObjectProvider } from "../context/PackerObjectContext";
+import { AddObjectContainer } from "./layout/AddObjectFormFrame";
+import { ListPackerObjectFrame } from "./layout/ListPackerObjectFrame";
+import { PackerObjectTypes } from "../commons/enums";
+import { PackerObjectProvider } from "../contexts/PackerObjectContext";
 
 // TODO - https://github.com/pmndrs/react-three-fiber
 

@@ -10,10 +10,10 @@ import { FormTextInput } from "../controls/FormTextInput";
 import {
   PackerObjectFormData,
   PackerObjectFormError,
-} from "../../common/packerObjectForm";
+} from "../../commons/packerObjectForm";
 import { DimensionsFormSection } from "./DimensionsFormSection";
 import { WeightFormSection } from "./WeightFormSection";
-import { PackerObjectTypes } from "../../common/enums";
+import { PackerObjectTypes } from "../../commons/enums";
 import { UnitsFormSection } from "./UnitsFormSection";
 
 type PackerObjectFormProps = {
