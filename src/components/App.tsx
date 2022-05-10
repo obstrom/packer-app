@@ -24,7 +24,7 @@ function App() {
       <AppContainer>
         <PageTitle text={"PackMe"} />
         <Container fluid="sm">
-          <Row>
+          <Row className="mb-4">
             <Col>
               <AddObjectContainer className="p-4 border rounded" />
             </Col>
@@ -39,6 +39,10 @@ function App() {
                 headerTitle="Items"
                 packerObjectType={PackerObjectTypes.ITEM}
               />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
               <RequestPackFrame />
             </Col>
           </Row>
