@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useContext, useState } from "react";
 import { PackerObjectForm } from "./form/PackerObjectForm";
 import { Bin, FormSelectOption, Item } from "../common/types";
 import Container from "react-bootstrap/Container";
@@ -17,12 +17,12 @@ import {
   PackerObjectFormData,
   PackerObjectFormError,
 } from "../common/packerObjectForm";
+import {
+  PackerObjectContext,
+  PackerObjectContextValue,
+} from "../context/PackerObjectContext";
 
 type AddObjectContainerProps = {
-  bins: Array<Bin>;
-  setBins: Dispatch<SetStateAction<Array<Bin>>>;
-  items: Array<Item>;
-  setItems: Dispatch<SetStateAction<Array<Item>>>;
   className?: string;
 };
 
@@ -40,21 +40,18 @@ const submitFormAction = (
   formType: PackerObjectTypes,
   formData: PackerObjectFormData,
   formError: PackerObjectFormError,
-  bins: Array<Bin>,
-  setBins: Dispatch<SetStateAction<Array<Bin>>>,
-  items: Array<Item>,
-  setItems: Dispatch<SetStateAction<Array<Item>>>
+  packerObjectContext: PackerObjectContextValue | null
 ) => {
   e.preventDefault();
 
   if (!checkNoFormErrors(formError)) return;
 
-  if (formType === "bin") {
+  if (formType === PackerObjectTypes.BIN) {
     const newBin: Bin = convertFormDataToBinObject(formData);
-    setBins([...bins, newBin]);
-  } else if (formType === "item") {
+    packerObjectContext?.bin?.add(newBin);
+  } else if (formType === PackerObjectTypes.ITEM) {
     const newItem: Item = convertFormDataToItemObject(formData);
-    setItems([...items, newItem]);
+    packerObjectContext?.item?.add(newItem);
   }
 };
 
@@ -62,16 +59,12 @@ const checkNoFormErrors = (formError: PackerObjectFormError): boolean => {
   return Object.values(formError).every((v) => v === false);
 };
 
-export const AddObjectContainer = ({
-  bins,
-  setBins,
-  items,
-  setItems,
-  className,
-}: AddObjectContainerProps) => {
+export const AddObjectContainer = ({ className }: AddObjectContainerProps) => {
   const [formType, setFormType] = useState(PackerObjectTypes.BIN);
   const [formData, setFormData] = useState(DEFAULT_FORM_DATA);
   const [formError, setFormError] = useState(DEFAULT_FORM_ERROR);
+
+  const packerObjectContext = useContext(PackerObjectContext);
 
   return (
     <Frame className={className}>
@@ -98,10 +91,7 @@ export const AddObjectContainer = ({
             formType,
             formData,
             formError,
-            bins,
-            setBins,
-            items,
-            setItems
+            packerObjectContext
           )
         }
         allowReset={true}

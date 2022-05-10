@@ -12,15 +12,8 @@ import { EditObjectFormModal } from "./EditObjectFormModal";
 type PackerObjectBadgeProps = {
   object: Bin | Item;
   type: PackerObjectTypes;
-  handleEdit: (
-    type: PackerObjectTypes,
-    packerObjects: Array<Bin> | Array<Item>,
-    setPackerObjects:
-      | Dispatch<SetStateAction<Array<Bin>>>
-      | Dispatch<SetStateAction<Array<Item>>>,
-    updatedObject: Bin | Item
-  ) => void;
-  handleDelete: (id: string) => void;
+  updateObject: ((updatedBin: Bin) => void) | ((updatedItem: Item) => void);
+  deleteObject: (id: string) => void;
   className?: string;
 };
 
@@ -38,8 +31,8 @@ const renderDimensions = (o: PackerObject) => {
 export const PackerObjectListItem = ({
   object,
   type,
-  handleEdit,
-  handleDelete,
+  updateObject,
+  deleteObject,
   className,
 }: PackerObjectBadgeProps) => {
   const [showEditModal, setShowEditModal] = useState(false);
@@ -73,7 +66,7 @@ export const PackerObjectListItem = ({
         <Button
           size="sm"
           variant="danger"
-          onClick={() => handleDelete(object.uuid)}
+          onClick={() => deleteObject(object.uuid)}
         >
           <FontAwesomeIcon icon={faTrashCan} />
         </Button>
@@ -83,7 +76,7 @@ export const PackerObjectListItem = ({
         handleClose={handleModalClose}
         type={type}
         object={object}
-        setObject={handleEdit}
+        updateObject={updateObject}
       />
     </BadgeContainer>
   );
