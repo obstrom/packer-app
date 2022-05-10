@@ -19,10 +19,6 @@ const Frame = styled(Stack)`
   background: #e8e8e8;
 `;
 
-const PackButton = styled(Button)`
-  font-weight: bold;
-`;
-
 const calcHasObjects = (items: Array<Item>, bins: Array<Bin>): boolean =>
   items.length > 0 && bins.length > 0;
 
@@ -60,7 +56,7 @@ export const RequestPackFrame = () => {
         </Stack>
       </Alert>
       <div className="d-flex justify-content-center mb-2">
-        <PackButton
+        <Button
           size="lg"
           variant={hasObjects ? "primary" : "secondary"}
           disabled={!hasObjects}
@@ -70,7 +66,7 @@ export const RequestPackFrame = () => {
           <FontAwesomeIcon icon={faBoxOpen} />
           <span className="ms-2">PACK</span>
           {loading && <Spinner animation="border" size="sm" className="ms-2" />}
-        </PackButton>
+        </Button>
       </div>
     </Frame>
   );
