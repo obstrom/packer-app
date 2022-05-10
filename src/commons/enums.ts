@@ -1,8 +1,8 @@
 export const enum LengthUnits {
-  METRIC_MILLIMETER,
-  METRIC_CENTIMETER,
-  METRIC_DECIMETER,
-  METRIC_METER,
+  METRIC_MILLIMETER = "METRIC_MILLIMETER",
+  METRIC_CENTIMETER = "METRIC_CENTIMETER",
+  METRIC_DECIMETER = "METRIC_DECIMETER",
+  METRIC_METER = "METRIC_METER",
 }
 
 export const stringToLengthUnit = (key: string) => {
@@ -32,8 +32,8 @@ export const lengthUnitToString = (lengthUnit: LengthUnits) => {
 };
 
 export const enum WeightUnits {
-  METRIC_GRAM,
-  METRIC_KILOGRAM,
+  METRIC_GRAM = "METRIC_GRAM",
+  METRIC_KILOGRAM = "METRIC_KILOGRAM",
 }
 
 export const stringToWeightUnit = (key: string) => {

@@ -8,6 +8,7 @@ import { AddObjectContainer } from "./layout/AddObjectFormFrame";
 import { ListPackerObjectFrame } from "./layout/ListPackerObjectFrame";
 import { PackerObjectTypes } from "../commons/enums";
 import { PackerObjectProvider } from "../contexts/PackerObjectContext";
+import { RequestPackFrame } from "./layout/RequestPackFrame";
 
 // TODO - https://github.com/pmndrs/react-three-fiber
 
@@ -15,10 +16,6 @@ const AppContainer = styled.div`
   background-color: #fff;
   min-width: 100vw;
   min-height: 100vh;
-`;
-
-const SetupContainer = styled.div`
-  max-width: 720px;
 `;
 
 function App() {
@@ -42,6 +39,7 @@ function App() {
                 headerTitle="Items"
                 packerObjectType={PackerObjectTypes.ITEM}
               />
+              <RequestPackFrame />
             </Col>
           </Row>
         </Container>
