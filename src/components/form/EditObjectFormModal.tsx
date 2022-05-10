@@ -55,6 +55,17 @@ const checkNoFormErrors = (formError: PackerObjectFormError): boolean => {
   return Object.values(formError).every((v) => v === false);
 };
 
+const updateButtonText = (type: PackerObjectTypes): string => {
+  switch (type) {
+    case PackerObjectTypes.BIN:
+      return "Update container";
+    case PackerObjectTypes.ITEM:
+      return "Update item";
+    case PackerObjectTypes.NONE:
+      return "Update";
+  }
+};
+
 export const EditObjectFormModal = ({
   show,
   handleClose,
@@ -77,14 +88,14 @@ export const EditObjectFormModal = ({
       <Modal.Header closeButton>
         <Modal.Title>{`Edit ${renderTypeTitle(type)}`}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="p-4">
         <PackerObjectForm
           formType={type}
           formData={formData}
           setFormData={setFormData}
           formError={formError}
           setFormError={setFormError}
-          submitButtonLabel="Update"
+          submitButtonLabel={updateButtonText(type)}
           handleOnSubmit={(e) =>
             submitFormAction(
               e,

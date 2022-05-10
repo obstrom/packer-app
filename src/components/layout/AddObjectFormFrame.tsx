@@ -21,6 +21,8 @@ import {
   PackerObjectContext,
   PackerObjectContextValue,
 } from "../../contexts/PackerObjectContext";
+import { ButtonGroup } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 type AddObjectContainerProps = {
   className?: string;
@@ -59,6 +61,17 @@ const checkNoFormErrors = (formError: PackerObjectFormError): boolean => {
   return Object.values(formError).every((v) => v === false);
 };
 
+const addButtonText = (type: PackerObjectTypes): string => {
+  switch (type) {
+    case PackerObjectTypes.BIN:
+      return "Add container";
+    case PackerObjectTypes.ITEM:
+      return "Add item";
+    case PackerObjectTypes.NONE:
+      return "Add";
+  }
+};
+
 export const AddObjectContainer = ({ className }: AddObjectContainerProps) => {
   const [formType, setFormType] = useState(PackerObjectTypes.BIN);
   const [formData, setFormData] = useState(DEFAULT_FORM_DATA);
@@ -69,22 +82,33 @@ export const AddObjectContainer = ({ className }: AddObjectContainerProps) => {
   return (
     <Frame className={className}>
       <h3>Add packing object</h3>
-      {/* TODO - Type selection should be a button group, rather then a dropdown */}
-      <FormSelect
-        controlId="typeSelect"
-        options={typeSelectOptions}
-        label="Select type"
-        onChange={(e) => setFormType(stringToPackerObjectType(e.target.value))}
-        value={packerObjectTypeToString(formType)}
-        className="mb-2"
-      />
+      <ButtonGroup className="mt-2 mb-4">
+        <Button
+          type="button"
+          size="lg"
+          disabled={formType === PackerObjectTypes.BIN}
+          onClick={() => setFormType(PackerObjectTypes.BIN)}
+          variant={formType === PackerObjectTypes.BIN ? "primary" : "light"}
+        >
+          Container
+        </Button>
+        <Button
+          type="button"
+          size="lg"
+          disabled={formType === PackerObjectTypes.ITEM}
+          onClick={() => setFormType(PackerObjectTypes.ITEM)}
+          variant={formType === PackerObjectTypes.ITEM ? "primary" : "light"}
+        >
+          Item
+        </Button>
+      </ButtonGroup>
       <PackerObjectForm
         formType={formType}
         formData={formData}
         setFormData={setFormData}
         formError={formError}
         setFormError={setFormError}
-        submitButtonLabel="Add"
+        submitButtonLabel={addButtonText(formType)}
         handleOnSubmit={(e: any) =>
           submitFormAction(
             e,

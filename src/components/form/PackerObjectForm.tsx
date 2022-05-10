@@ -42,6 +42,7 @@ export const PackerObjectForm = ({
   return (
     <Form onSubmit={handleOnSubmit}>
       <Col className="mb-4">
+        <h4>General</h4>
         <FormTextInput
           label="Description"
           controlId="inputDescription"
@@ -50,11 +51,8 @@ export const PackerObjectForm = ({
             setFormData({ ...formData, description: e.target.value })
           }
         />
-      </Col>
-      {formType === PackerObjectTypes.ITEM && (
-        <Col className="mb-4">
-          <h4>Amount</h4>
-          <Row>
+        {formType === PackerObjectTypes.ITEM && (
+          <Row className="mt-2">
             <Col>
               <FormUnitNumberInput
                 label="Quantity"
@@ -70,8 +68,8 @@ export const PackerObjectForm = ({
               />
             </Col>
           </Row>
-        </Col>
-      )}
+        )}
+      </Col>
       <Col className="mb-4">
         <DimensionsFormSection
           formData={formData}
@@ -92,13 +90,13 @@ export const PackerObjectForm = ({
       <Col className="mb-4">
         <UnitsFormSection formData={formData} setFormData={setFormData} />
       </Col>
-      <Col>
-        <Button type="submit">{submitButtonLabel}</Button>
+      <Col className="d-flex justify-content-end">
         {allowReset && (
           <Button className="btn-secondary mx-2" onClick={handleOnReset}>
             Reset
           </Button>
         )}
+        <Button type="submit">{submitButtonLabel}</Button>
       </Col>
     </Form>
   );

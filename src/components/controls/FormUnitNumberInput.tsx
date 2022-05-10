@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { InputGroup } from "react-bootstrap";
 
 type FormUnitNumberInputProps = {
   value: string;
@@ -46,7 +48,7 @@ export const FormUnitNumberInput = ({
 
   return (
     <Form.Group controlId={controlId} className={className}>
-      <Form.Label>{label}</Form.Label>
+      <Form.Label className="mb-1">{label}</Form.Label>
       <Form.Group className="input-group">
         <Form.Control
           type="text"

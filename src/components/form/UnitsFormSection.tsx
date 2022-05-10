@@ -34,30 +34,28 @@ export const UnitsFormSection = ({
   return (
     <>
       <h4>Units</h4>
-      <Row>
-        <Col>
-          <FormSelect
-            controlId={"lengthUnitSelect"}
-            options={lengthUnitSelectOptions}
-            label="Length unit"
-            onChange={(e) =>
-              setFormData({ ...formData, lengthUnit: e.target.value })
-            }
-            value={formData.lengthUnit}
-          />
-        </Col>
-        <Col>
-          <FormSelect
-            controlId={"weightUnitSelect"}
-            options={weightUnitSelectOptions}
-            label="Weight unit"
-            onChange={(e) =>
-              setFormData({ ...formData, weightUnit: e.target.value })
-            }
-            value={formData.weightUnit}
-          />
-        </Col>
-      </Row>
+      <Stack direction="horizontal">
+        <FormSelect
+          controlId={"lengthUnitSelect"}
+          options={lengthUnitSelectOptions}
+          label="Length unit"
+          onChange={(e) =>
+            setFormData({ ...formData, lengthUnit: e.target.value })
+          }
+          value={formData.lengthUnit}
+          className="flex-grow-1"
+        />
+        <FormSelect
+          controlId={"weightUnitSelect"}
+          options={weightUnitSelectOptions}
+          label="Weight unit"
+          onChange={(e) =>
+            setFormData({ ...formData, weightUnit: e.target.value })
+          }
+          value={formData.weightUnit}
+          className="flex-grow-1 ms-2"
+        />
+      </Stack>
     </>
   );
 };

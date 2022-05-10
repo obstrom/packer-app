@@ -25,7 +25,7 @@ export const WeightFormSection = ({
   return (
     <>
       <h4>Weight</h4>
-      <Stack direction="horizontal" gap={2}>
+      <Stack direction="horizontal">
         <FormUnitNumberInput
           label="Weight"
           controlId="inputWeight"
@@ -35,6 +35,7 @@ export const WeightFormSection = ({
           setError={(b: boolean) => setFormError({ ...formError, weight: b })}
           required={true}
           allowZero={true}
+          className="flex-grow-1"
         />
         {formType === PackerObjectTypes.BIN && (
           <FormUnitNumberInput
@@ -47,6 +48,7 @@ export const WeightFormSection = ({
               setFormError({ ...formError, maxWeight: b })
             }
             allowZero={true}
+            className="flex-grow-1 ms-2"
           />
         )}
       </Stack>

@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import { FormSelectOption } from "../../commons/types";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 type FormSelectProps = {
   controlId: string;
