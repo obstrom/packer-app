@@ -10,8 +10,8 @@ import {
   stringToPackerObjectType,
 } from "../common/enums";
 import {
-  convertFormDataToBinObject,
-  convertFormDataToItemObject,
+  convertFormDataToNewBinObject,
+  convertFormDataToNewItemObject,
   DEFAULT_FORM_DATA,
   DEFAULT_FORM_ERROR,
   PackerObjectFormData,
@@ -47,10 +47,10 @@ const submitFormAction = (
   if (!checkNoFormErrors(formError)) return;
 
   if (formType === PackerObjectTypes.BIN) {
-    const newBin: Bin = convertFormDataToBinObject(formData);
+    const newBin: Bin = convertFormDataToNewBinObject(formData);
     packerObjectContext?.bin?.add(newBin);
   } else if (formType === PackerObjectTypes.ITEM) {
-    const newItem: Item = convertFormDataToItemObject(formData);
+    const newItem: Item = convertFormDataToNewItemObject(formData);
     packerObjectContext?.item?.add(newItem);
   }
 };

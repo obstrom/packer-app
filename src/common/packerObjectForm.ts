@@ -10,6 +10,7 @@ import {
 import { Bin, Item } from "./types";
 
 export interface PackerObjectFormData {
+  uuid: string;
   description: string;
   width: string;
   depth: string;
@@ -33,7 +34,9 @@ export interface PackerObjectFormError {
   quantity: boolean;
 }
 
-export const convertFormDataToBinObject = (data: PackerObjectFormData): Bin => {
+export const convertFormDataToNewBinObject = (
+  data: PackerObjectFormData
+): Bin => {
   return {
     uuid: uuidv4(),
     description: data.description,
@@ -47,7 +50,21 @@ export const convertFormDataToBinObject = (data: PackerObjectFormData): Bin => {
   };
 };
 
-export const convertFormDataToItemObject = (
+export const convertFormDataToBinObject = (data: PackerObjectFormData): Bin => {
+  return {
+    uuid: data.uuid,
+    description: data.description,
+    width: parseInt(data.width),
+    depth: parseInt(data.depth),
+    height: parseInt(data.height),
+    weight: parseInt(data.weight),
+    maxWeight: parseInt(data.maxWeight),
+    lengthUnit: stringToLengthUnit(data.lengthUnit) as LengthUnits,
+    weightUnit: stringToWeightUnit(data.weightUnit) as WeightUnits,
+  };
+};
+
+export const convertFormDataToNewItemObject = (
   data: PackerObjectFormData
 ): Item => {
   return {
@@ -63,8 +80,25 @@ export const convertFormDataToItemObject = (
   };
 };
 
+export const convertFormDataToItemObject = (
+  data: PackerObjectFormData
+): Item => {
+  return {
+    uuid: data.uuid,
+    description: data.description,
+    width: parseInt(data.width),
+    depth: parseInt(data.depth),
+    height: parseInt(data.height),
+    weight: parseInt(data.weight),
+    quantity: parseInt(data.quantity),
+    lengthUnit: stringToLengthUnit(data.lengthUnit) as LengthUnits,
+    weightUnit: stringToWeightUnit(data.weightUnit) as WeightUnits,
+  };
+};
+
 export const convertBinObjectToFormData = (bin: Bin): PackerObjectFormData => {
   return {
+    uuid: bin.uuid,
     description: bin.description,
     width: bin.width.toString(10),
     depth: bin.depth.toString(10),
@@ -81,6 +115,7 @@ export const convertItemObjectToFormData = (
   item: Item
 ): PackerObjectFormData => {
   return {
+    uuid: item.uuid,
     description: item.description,
     width: item.width.toString(10),
     depth: item.depth.toString(10),
@@ -94,6 +129,7 @@ export const convertItemObjectToFormData = (
 };
 
 export const DEFAULT_FORM_DATA: PackerObjectFormData = {
+  uuid: "",
   description: "",
   width: "1",
   depth: "1",

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { PackerObjectTypes } from "../common/enums";
 import { PackerObjectForm } from "./form/PackerObjectForm";
@@ -13,7 +13,6 @@ import {
   PackerObjectFormData,
   PackerObjectFormError,
 } from "../common/packerObjectForm";
-import { PackerObjectContextValue } from "../context/PackerObjectContext";
 
 type EditObjectFormModalProps = {
   show: boolean;
@@ -32,7 +31,8 @@ const submitFormAction = (
   formType: PackerObjectTypes,
   formData: PackerObjectFormData,
   formError: PackerObjectFormError,
-  updateObject: ((updatedItem: Item) => void) | ((updatedBin: Bin) => void)
+  updateObject: ((updatedItem: Item) => void) | ((updatedBin: Bin) => void),
+  handleClose: () => void
 ) => {
   e.preventDefault();
 
@@ -47,6 +47,8 @@ const submitFormAction = (
     const newItem: Item = convertFormDataToItemObject(formData);
     updateItem(newItem);
   }
+
+  handleClose();
 };
 
 const checkNoFormErrors = (formError: PackerObjectFormError): boolean => {
@@ -84,7 +86,14 @@ export const EditObjectFormModal = ({
           setFormError={setFormError}
           submitButtonLabel="Update"
           handleOnSubmit={(e) =>
-            submitFormAction(e, type, formData, formError, updateObject)
+            submitFormAction(
+              e,
+              type,
+              formData,
+              formError,
+              updateObject,
+              handleClose
+            )
           }
           allowReset={false}
         />
