@@ -8,7 +8,7 @@ import { AddObjectContainer } from "./layout/AddObjectFormFrame";
 import { ListPackerObjectFrame } from "./layout/ListPackerObjectFrame";
 import { PackerObjectTypes } from "../commons/enums";
 import { PackerObjectProvider } from "../contexts/PackerObjectContext";
-import { RequestPackFrame } from "./layout/RequestPackFrame";
+import { PackerRequestFrame } from "./layout/PackerRequestFrame";
 import { PackerResponseProvider } from "../contexts/PackerResponseContext";
 import { PackerResultsFrame } from "./layout/PackerResultsFrame";
 
@@ -28,7 +28,7 @@ function App() {
           <PageTitle text={"PackMe"} />
           <Container fluid="sm">
             <Row className="mb-4">
-              <Col>
+              <Col className="mb-4">
                 <AddObjectContainer className="p-4 border rounded" />
               </Col>
               <Col>
@@ -42,15 +42,23 @@ function App() {
                   headerTitle="Items"
                   packerObjectType={PackerObjectTypes.ITEM}
                 />
-                <RequestPackFrame />
+                <PackerRequestFrame />
               </Col>
             </Row>
             <Row>
               <Col>
-                <PackerResultsFrame />
+                <PackerResultsFrame className="p-4 border rounded" />
               </Col>
             </Row>
           </Container>
+          <div className="p-4 mt-4">
+            <h5 className="text-black-50">TODO - Needs implementing:</h5>
+            <ul className="text-black-50">
+              <li>Detailed view for each container</li>
+              <li>Collapse upper portion on successful results</li>
+              <li>3D visuals</li>
+            </ul>
+          </div>
         </AppContainer>
       </PackerResponseProvider>
     </PackerObjectProvider>

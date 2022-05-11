@@ -83,3 +83,25 @@ export const packerObjectTypeToString = (type: PackerObjectTypes): string => {
       return "";
   }
 };
+
+export const enum PackerJobResponseStatus {
+  SUCCESS = "success",
+  FAILURE = "failure",
+  ERROR = "error",
+  NONE = "",
+}
+
+export const stringToPackerJobResponseStatus = (
+  type: PackerJobResponseStatus
+) => {
+  switch (type) {
+    case PackerJobResponseStatus.SUCCESS:
+      return "success";
+    case PackerJobResponseStatus.FAILURE:
+      return "failure";
+    case PackerJobResponseStatus.ERROR:
+      return "error";
+    default:
+      return "";
+  }
+};

@@ -15,6 +15,7 @@ import {
 import useFetch from "../../hooks/useFetch";
 import { createPackerRequestBody } from "../../commons/packerAPI";
 import { PackerResponseContext } from "../../contexts/PackerResponseContext";
+import { PackerJobResponseStatus } from "../../commons/enums";
 
 const Frame = styled(Stack)`
   background: #e8e8e8;
@@ -26,7 +27,12 @@ const calcHasObjects = (items: Array<Item>, bins: Array<Bin>): boolean =>
 const sumItemQuantities = (items: Array<Item>): number =>
   items.reduce((sum, item) => sum + item.quantity, 0);
 
-export const RequestPackFrame = () => {
+const renderItemQuantities = (items: Array<Item>): string => {
+  const qty = sumItemQuantities(items);
+  return qty === 1 ? "one item" : `${qty} items`;
+};
+
+export const PackerRequestFrame = () => {
   const { post, loading } = useFetch(process.env.REACT_APP_API_BASE_URL ?? "");
 
   const packerObjectContext = useContext(PackerObjectContext);
@@ -38,16 +44,26 @@ export const RequestPackFrame = () => {
   const hasObjects: boolean = calcHasObjects(items, bins);
 
   const sendToAPI = () => {
-    if (items.length === 0 || bins.length === 0) return; // Abort if empty
+    // Abort if empty
+    if (items.length === 0 || bins.length === 0) {
+      packerResponseContext?.setStatus(PackerJobResponseStatus.FAILURE);
+      return;
+    }
 
     // TODO - Fix lengthUnit and weightUnit - Right now API expects Global setting while front-end handles this per object
     post("/pack", createPackerRequestBody(items, bins, "mm", "g")).then(
       (data: any) => {
         try {
+          data.boxes.length > 0
+            ? packerResponseContext?.setStatus(PackerJobResponseStatus.SUCCESS)
+            : packerResponseContext?.setStatus(PackerJobResponseStatus.FAILURE);
+
           packerResponseContext?.setResults(data.boxes);
           packerResponseContext?.setVisData(data.visualizeData.containers);
+          packerResponseContext?.incrementRequestCounter();
         } catch (e) {
           // TODO - Display error message for user
+          packerResponseContext?.setStatus(PackerJobResponseStatus.ERROR);
           console.error(e);
         }
       }
@@ -56,7 +72,7 @@ export const RequestPackFrame = () => {
 
   return (
     <Frame className="rounded border p-2" direction="vertical">
-      <Alert variant={hasObjects ? "dark" : "warning"}>
+      <Alert variant={hasObjects ? "info" : "dark"}>
         <Stack direction="horizontal" gap={3}>
           <FontAwesomeIcon
             size="2x"
@@ -65,12 +81,12 @@ export const RequestPackFrame = () => {
           />
           <span>
             {hasObjects
-              ? `Will attempt to find optimal packing for ${sumItemQuantities(
+              ? `Will attempt to find optimal packing for ${renderItemQuantities(
                   items
-                )} items using ${
+                )} using ${
                   bins.length === 1
                     ? "one container size"
-                    : `any combination of ${bins.length} different container sizes`
+                    : `any combination of ${bins.length} different containers`
                 }.`
               : "Requires at least one container and one item to pack!"}
           </span>
@@ -85,7 +101,7 @@ export const RequestPackFrame = () => {
           onClick={() => sendToAPI()}
         >
           <FontAwesomeIcon icon={faBoxesPacking} />
-          <span className="ms-2">PACK</span>
+          <span className="ms-2">RUN PACKER</span>
           {loading && <Spinner animation="border" size="sm" className="ms-2" />}
         </Button>
       </div>
