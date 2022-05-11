@@ -9,6 +9,8 @@ import { ListPackerObjectFrame } from "./layout/ListPackerObjectFrame";
 import { PackerObjectTypes } from "../commons/enums";
 import { PackerObjectProvider } from "../contexts/PackerObjectContext";
 import { RequestPackFrame } from "./layout/RequestPackFrame";
+import { PackerResponseProvider } from "../contexts/PackerResponseContext";
+import { PackerResultsFrame } from "./layout/PackerResultsFrame";
 
 // TODO - https://github.com/pmndrs/react-three-fiber
 
@@ -21,33 +23,36 @@ const AppContainer = styled.div`
 function App() {
   return (
     <PackerObjectProvider>
-      <AppContainer>
-        <PageTitle text={"PackMe"} />
-        <Container fluid="sm">
-          <Row className="mb-4">
-            <Col>
-              <AddObjectContainer className="p-4 border rounded" />
-            </Col>
-            <Col>
-              <ListPackerObjectFrame
-                className="mb-2"
-                headerTitle="Containers"
-                packerObjectType={PackerObjectTypes.BIN}
-              />
-              <ListPackerObjectFrame
-                className="mb-2"
-                headerTitle="Items"
-                packerObjectType={PackerObjectTypes.ITEM}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <RequestPackFrame />
-            </Col>
-          </Row>
-        </Container>
-      </AppContainer>
+      <PackerResponseProvider>
+        <AppContainer>
+          <PageTitle text={"PackMe"} />
+          <Container fluid="sm">
+            <Row className="mb-4">
+              <Col>
+                <AddObjectContainer className="p-4 border rounded" />
+              </Col>
+              <Col>
+                <ListPackerObjectFrame
+                  className="mb-2"
+                  headerTitle="Containers"
+                  packerObjectType={PackerObjectTypes.BIN}
+                />
+                <ListPackerObjectFrame
+                  className="mb-2"
+                  headerTitle="Items"
+                  packerObjectType={PackerObjectTypes.ITEM}
+                />
+                <RequestPackFrame />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <PackerResultsFrame />
+              </Col>
+            </Row>
+          </Container>
+        </AppContainer>
+      </PackerResponseProvider>
     </PackerObjectProvider>
   );
 }

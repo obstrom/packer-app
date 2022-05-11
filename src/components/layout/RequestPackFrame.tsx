@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../hooks/useFetch";
 import { createPackerRequestBody } from "../../commons/packerAPI";
+import { PackerResponseContext } from "../../contexts/PackerResponseContext";
 
 const Frame = styled(Stack)`
   background: #e8e8e8;
@@ -24,7 +25,10 @@ const calcHasObjects = (items: Array<Item>, bins: Array<Bin>): boolean =>
 
 export const RequestPackFrame = () => {
   const { post, loading } = useFetch(process.env.REACT_APP_API_BASE_URL ?? "");
+
   const packerObjectContext = useContext(PackerObjectContext);
+  const packerResponseContext = useContext(PackerResponseContext);
+
   const items: Array<Item> = packerObjectContext?.item?.get ?? [];
   const bins: Array<Bin> = packerObjectContext?.bin?.get ?? [];
 
@@ -35,7 +39,15 @@ export const RequestPackFrame = () => {
 
     // TODO - Fix lengthUnit and weightUnit - Right now API expects Global setting while front-end handles this per object
     post("/pack", createPackerRequestBody(items, bins, "mm", "g")).then(
-      (data) => console.log(data)
+      (data: any) => {
+        try {
+          packerResponseContext?.setResults(data.boxes);
+          packerResponseContext?.setVisData(data.visualizeData.containers);
+        } catch (e) {
+          // TODO - Display error message for user
+          console.error(e);
+        }
+      }
     );
   };
 
