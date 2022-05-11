@@ -8,7 +8,7 @@ import { PackerObjectContext } from "../../contexts/PackerObjectContext";
 import { Bin, Item } from "../../commons/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBoxOpen,
+  faBoxesPacking,
   faCircleInfo,
   faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
@@ -22,6 +22,9 @@ const Frame = styled(Stack)`
 
 const calcHasObjects = (items: Array<Item>, bins: Array<Bin>): boolean =>
   items.length > 0 && bins.length > 0;
+
+const sumItemQuantities = (items: Array<Item>): number =>
+  items.reduce((sum, item) => sum + item.quantity, 0);
 
 export const RequestPackFrame = () => {
   const { post, loading } = useFetch(process.env.REACT_APP_API_BASE_URL ?? "");
@@ -62,7 +65,13 @@ export const RequestPackFrame = () => {
           />
           <span>
             {hasObjects
-              ? `Will attempt to find optimal packing for ${items.length} items using any of ${bins.length} different containers.`
+              ? `Will attempt to find optimal packing for ${sumItemQuantities(
+                  items
+                )} items using ${
+                  bins.length === 1
+                    ? "one container size"
+                    : `any combination of ${bins.length} different container sizes`
+                }.`
               : "Requires at least one container and one item to pack!"}
           </span>
         </Stack>
@@ -75,7 +84,7 @@ export const RequestPackFrame = () => {
           className="d-flex align-items-center"
           onClick={() => sendToAPI()}
         >
-          <FontAwesomeIcon icon={faBoxOpen} />
+          <FontAwesomeIcon icon={faBoxesPacking} />
           <span className="ms-2">PACK</span>
           {loading && <Spinner animation="border" size="sm" className="ms-2" />}
         </Button>

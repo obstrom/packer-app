@@ -10,6 +10,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { FormSelect } from "../controls/FormSelect";
 import { FormSelectOption } from "../../commons/types";
+import { faRuler, faWeightHanging } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type UnitsFormSectionProps = {
   formData: PackerObjectFormData;
@@ -33,7 +35,10 @@ export const UnitsFormSection = ({
 }: UnitsFormSectionProps) => {
   return (
     <>
-      <h4>Units</h4>
+      <h4>
+        <FontAwesomeIcon size="sm" icon={faRuler} className={"me-2"} />
+        Units
+      </h4>
       <Stack direction="horizontal">
         <FormSelect
           controlId={"lengthUnitSelect"}

@@ -5,6 +5,8 @@ import {
   PackerObjectFormData,
   PackerObjectFormError,
 } from "../../commons/packerObjectForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowsLeftRightToLine } from "@fortawesome/free-solid-svg-icons";
 
 type DimensionsFormSectionProps = {
   formData: PackerObjectFormData;
@@ -21,7 +23,14 @@ export const DimensionsFormSection = ({
 }: DimensionsFormSectionProps) => {
   return (
     <>
-      <h4>Dimensions</h4>
+      <h4>
+        <FontAwesomeIcon
+          size="sm"
+          icon={faArrowsLeftRightToLine}
+          className={"me-2"}
+        />
+        Dimensions
+      </h4>
       <Stack direction="horizontal" gap={2}>
         <FormUnitNumberInput
           label="Width"

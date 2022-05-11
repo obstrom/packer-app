@@ -6,6 +6,11 @@ import {
   PackerObjectFormError,
 } from "../../commons/packerObjectForm";
 import { PackerObjectTypes } from "../../commons/enums";
+import {
+  faArrowsLeftRightToLine,
+  faWeightHanging,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type WeightFormSectionProps = {
   formType: PackerObjectTypes;
@@ -24,7 +29,10 @@ export const WeightFormSection = ({
 }: WeightFormSectionProps) => {
   return (
     <>
-      <h4>Weight</h4>
+      <h4>
+        <FontAwesomeIcon size="sm" icon={faWeightHanging} className={"me-2"} />
+        Weights
+      </h4>
       <Stack direction="horizontal">
         <FormUnitNumberInput
           label="Weight"
@@ -39,7 +47,7 @@ export const WeightFormSection = ({
         />
         {formType === PackerObjectTypes.BIN && (
           <FormUnitNumberInput
-            label="Max weight"
+            label="Max load weight"
             controlId="inputMaxWeight"
             unitText={formData.weightUnit}
             value={formData.maxWeight}

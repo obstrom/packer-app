@@ -15,6 +15,11 @@ import { DimensionsFormSection } from "./DimensionsFormSection";
 import { WeightFormSection } from "./WeightFormSection";
 import { PackerObjectTypes } from "../../commons/enums";
 import { UnitsFormSection } from "./UnitsFormSection";
+import {
+  faCircleInfo,
+  faWeightHanging,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type PackerObjectFormProps = {
   formType: PackerObjectTypes;
@@ -42,7 +47,10 @@ export const PackerObjectForm = ({
   return (
     <Form onSubmit={handleOnSubmit}>
       <Col className="mb-4">
-        <h4>General</h4>
+        <h4>
+          <FontAwesomeIcon size="sm" icon={faCircleInfo} className={"me-2"} />
+          General
+        </h4>
         <FormTextInput
           label="Description"
           controlId="inputDescription"

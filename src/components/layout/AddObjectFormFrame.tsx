@@ -23,6 +23,8 @@ import {
 } from "../../contexts/PackerObjectContext";
 import { ButtonGroup } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBoxOpen, faGifts } from "@fortawesome/free-solid-svg-icons";
 
 type AddObjectContainerProps = {
   className?: string;
@@ -89,8 +91,10 @@ export const AddObjectContainer = ({ className }: AddObjectContainerProps) => {
           disabled={formType === PackerObjectTypes.BIN}
           onClick={() => setFormType(PackerObjectTypes.BIN)}
           variant={formType === PackerObjectTypes.BIN ? "primary" : "light"}
+          className="d-flex align-items-center"
         >
-          Container
+          <FontAwesomeIcon icon={faBoxOpen} />
+          <span className="ms-2">Container</span>
         </Button>
         <Button
           type="button"
@@ -99,7 +103,8 @@ export const AddObjectContainer = ({ className }: AddObjectContainerProps) => {
           onClick={() => setFormType(PackerObjectTypes.ITEM)}
           variant={formType === PackerObjectTypes.ITEM ? "primary" : "light"}
         >
-          Item
+          <FontAwesomeIcon icon={faGifts} />
+          <span className="ms-2">Item</span>
         </Button>
       </ButtonGroup>
       <PackerObjectForm
