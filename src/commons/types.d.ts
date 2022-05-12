@@ -49,7 +49,11 @@ interface PackerJobRequest {
   products: Array<PackerItemRequest>;
 }
 
-interface PackerJobResult {}
+interface ResultsVolume {
+  totalJobVolume: number;
+  totalJobVolumeRemaining: number;
+  totalJobVolumeUsed: number;
+}
 
 interface ResultContainer {
   id: string;

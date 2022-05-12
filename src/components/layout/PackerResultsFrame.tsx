@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import Stack from "react-bootstrap/Stack";
-import { ResultContainer, VisContainer } from "../../commons/types";
+import {
+  ResultContainer,
+  ResultsVolume,
+  VisContainer,
+} from "../../commons/types";
 import { PackerResponseContext } from "../../contexts/PackerResponseContext";
 import Badge from "react-bootstrap/Badge";
 import { PackerJobResponseStatus } from "../../commons/enums";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo, faWarning } from "@fortawesome/free-solid-svg-icons";
+import { faWarning } from "@fortawesome/free-solid-svg-icons";
 import Alert from "react-bootstrap/Alert";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -33,6 +37,12 @@ const renderStatusBadge = (status: PackerJobResponseStatus) => {
           Failure
         </Badge>
       );
+    case PackerJobResponseStatus.TIMEOUT:
+      return (
+        <Badge className="ms-2" bg="danger">
+          Timeout
+        </Badge>
+      );
     case PackerJobResponseStatus.ERROR:
       return (
         <Badge className="ms-2" bg="danger">
@@ -56,6 +66,11 @@ const renderInfoAlert = (status: PackerJobResponseStatus) => {
       text =
         "Could not find any packing solution for this job. Most likely the items does not fit the container(s).";
       break;
+    case PackerJobResponseStatus.TIMEOUT:
+      variant = "danger";
+      text =
+        "Packing request timed out. Try reducing the amount of containers and items.";
+      break;
     case PackerJobResponseStatus.ERROR:
       variant = "danger";
       text = "Something went wrong! Please try again.";
@@ -71,19 +86,13 @@ const renderInfoAlert = (status: PackerJobResponseStatus) => {
   );
 };
 
-// TODO - Move this calculation to the backend
-const sumTotalVolumeUsed = (containers: Array<ResultContainer>) =>
-  containers.reduce((sum, container) => sum + container.totalVolume, 0);
-
-const sumTotalVolumeLeft = (containers: Array<ResultContainer>) =>
-  containers.reduce((sum, container) => sum + container.content.volumeLeft, 0);
-
-const calcTotalVolumeUsagePercentage = (
-  containers: Array<ResultContainer>
+const calcSpaceEfficiencyPercentage = (
+  volume: ResultsVolume | undefined
 ): string => {
-  const used = sumTotalVolumeUsed(containers);
-  const left = sumTotalVolumeLeft(containers);
-  return `${Math.round((used / (used + left)) * 100)}%`;
+  if (!volume) return "";
+  return `${Math.round(
+    (volume.totalJobVolumeUsed / volume.totalJobVolume) * 100
+  )}%`;
 };
 
 export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
@@ -95,12 +104,14 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
   const requestCounter: number = packerResponseContext?.requestCounter ?? 0;
   const status: PackerJobResponseStatus =
     packerResponseContext?.status ?? PackerJobResponseStatus.NONE;
+  const volume: ResultsVolume | undefined =
+    packerResponseContext?.resultsVolume ?? undefined;
 
   return (
     <Frame className={className}>
       <h3>Packing results {renderStatusBadge(status)}</h3>
       {renderInfoAlert(status)}
-      {status == PackerJobResponseStatus.SUCCESS && (
+      {status === PackerJobResponseStatus.SUCCESS && (
         <>
           <Col>
             <h4>Overview:</h4>
@@ -112,8 +123,8 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
             <h4>Optimization:</h4>
             <Row>
               <p>
-                {`Total container space used: ${calcTotalVolumeUsagePercentage(
-                  packerResults
+                {`Total container space used: ${calcSpaceEfficiencyPercentage(
+                  volume
                 )}
             `}
               </p>

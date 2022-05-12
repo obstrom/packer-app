@@ -73,6 +73,7 @@ export const PackerObjectForm = ({
                   setFormError({ ...formError, quantity: b })
                 }
                 allowZero={false}
+                maxValue={999}
               />
             </Col>
           </Row>

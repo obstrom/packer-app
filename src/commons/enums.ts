@@ -88,6 +88,7 @@ export const enum PackerJobResponseStatus {
   SUCCESS = "success",
   FAILURE = "failure",
   ERROR = "error",
+  TIMEOUT = "timeout",
   NONE = "",
 }
 
@@ -101,6 +102,8 @@ export const stringToPackerJobResponseStatus = (
       return "failure";
     case PackerJobResponseStatus.ERROR:
       return "error";
+    case PackerJobResponseStatus.TIMEOUT:
+      return "timeout";
     default:
       return "";
   }

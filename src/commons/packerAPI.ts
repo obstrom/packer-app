@@ -59,21 +59,3 @@ export const createPackerRequestBody = (
     products: convertItemsToPackerItemRequests(items),
   };
 };
-
-export const deserializePackerResponseResultsContainers = (
-  input: Array<any>
-): Array<ResultContainer> => {
-  return input.map((o) => ({
-    id: o.id,
-    description: o.description,
-    totalVolume: o.totalVolume,
-    volumeUsedPercentage: o.volumeUsedPercentage,
-    totalWeight: o.totalWeight,
-    content: {
-      dz: o.content.dz,
-      itemsPlaced: o.content.itemsPlaced,
-      volumeLeft: o.content.volumeLeft,
-      weightLeftToMaxWeight: o.content.weightLeftToMaxWeight,
-    },
-  }));
-};

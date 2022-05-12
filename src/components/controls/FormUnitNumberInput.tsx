@@ -13,6 +13,7 @@ type FormUnitNumberInputProps = {
   className?: string;
   required?: boolean;
   allowZero?: boolean;
+  maxValue?: number;
 };
 
 export const FormUnitNumberInput = ({
@@ -25,6 +26,7 @@ export const FormUnitNumberInput = ({
   className,
   required = false,
   allowZero = true,
+  maxValue,
 }: FormUnitNumberInputProps) => {
   const [isInvalid, setIsInvalid] = useState(false);
 
@@ -32,7 +34,11 @@ export const FormUnitNumberInput = ({
     const input = e.target.value;
     const inputValid = e.target.validity.valid;
 
-    if (input === "" || (!allowZero && parseInt(input) === 0)) {
+    if (
+      input === "" ||
+      (!allowZero && parseInt(input) === 0) ||
+      (maxValue && input > maxValue)
+    ) {
       setIsInvalid(true);
       setError(true);
       return input;

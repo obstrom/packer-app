@@ -4,7 +4,7 @@ import React, {
   SetStateAction,
   useState,
 } from "react";
-import { ResultContainer, VisContainer } from "../commons/types";
+import { ResultContainer, VisContainer, ResultsVolume } from "../commons/types";
 import { PackerJobResponseStatus } from "../commons/enums";
 
 export interface PackerResponseContextValue {
@@ -16,6 +16,8 @@ export interface PackerResponseContextValue {
   setResults: Dispatch<SetStateAction<Array<ResultContainer>>>;
   visData: Array<VisContainer>;
   setVisData: Dispatch<SetStateAction<Array<VisContainer>>>;
+  resultsVolume: ResultsVolume | null;
+  setResultsVolume: Dispatch<SetStateAction<ResultsVolume | null>>;
 }
 
 const PackerResponseContext = createContext<PackerResponseContextValue | null>(
@@ -27,8 +29,13 @@ const PackerResponseProvider = (props: any) => {
     PackerJobResponseStatus.NONE
   );
   const [requestCounter, setRequestCounter] = useState<number>(0);
-  const [results, setResults] = useState<Array<ResultContainer>>([]);
+  const [resultsContainers, setResultsContainers] = useState<
+    Array<ResultContainer>
+  >([]);
   const [visData, setVisData] = useState<Array<VisContainer>>([]);
+  const [resultsVolume, setResultsVolume] = useState<ResultsVolume | null>(
+    null
+  );
 
   const incrementRequestCounter = (): void =>
     setRequestCounter((prevState: number) => prevState++);
@@ -38,10 +45,12 @@ const PackerResponseProvider = (props: any) => {
     setStatus,
     requestCounter,
     incrementRequestCounter,
-    results,
-    setResults,
+    results: resultsContainers,
+    setResults: setResultsContainers,
     visData,
     setVisData,
+    resultsVolume,
+    setResultsVolume,
   };
 
   return (
