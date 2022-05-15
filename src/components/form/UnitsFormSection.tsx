@@ -1,16 +1,9 @@
 import React, { Dispatch, SetStateAction } from "react";
 import Stack from "react-bootstrap/Stack";
-import { FormUnitNumberInput } from "../controls/FormUnitNumberInput";
-import {
-  PackerObjectFormData,
-  PackerObjectFormError,
-} from "../../commons/packerObjectForm";
-import { PackerObjectTypes } from "../../commons/enums";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { PackerObjectFormData } from "../../commons/packerObjectForm";
 import { FormSelect } from "../controls/FormSelect";
 import { FormSelectOption } from "../../commons/types";
-import { faRuler, faWeightHanging } from "@fortawesome/free-solid-svg-icons";
+import { faRuler } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type UnitsFormSectionProps = {

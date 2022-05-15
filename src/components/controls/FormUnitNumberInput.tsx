@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import { InputGroup } from "react-bootstrap";
 
 type FormUnitNumberInputProps = {
   value: string;

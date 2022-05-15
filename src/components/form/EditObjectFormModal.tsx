@@ -76,7 +76,7 @@ export const EditObjectFormModal = ({
   const initialFormData =
     type === "bin"
       ? convertBinObjectToFormData(object as Bin)
-      : type == "item"
+      : type === "item"
       ? convertItemObjectToFormData(object as Item)
       : DEFAULT_FORM_DATA;
 

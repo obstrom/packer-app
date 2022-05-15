@@ -4,10 +4,6 @@ import {
   PackerContainerRequest,
   PackerItemRequest,
   PackerJobRequest,
-  ResultContainer,
-  ResultContainerContent,
-  VisContainer,
-  VisStack,
 } from "./types";
 import {
   LengthUnits,

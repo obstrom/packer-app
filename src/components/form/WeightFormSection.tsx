@@ -6,10 +6,7 @@ import {
   PackerObjectFormError,
 } from "../../commons/packerObjectForm";
 import { PackerObjectTypes } from "../../commons/enums";
-import {
-  faArrowsLeftRightToLine,
-  faWeightHanging,
-} from "@fortawesome/free-solid-svg-icons";
+import { faWeightHanging } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type WeightFormSectionProps = {

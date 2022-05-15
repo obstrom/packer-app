@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -15,10 +15,7 @@ import { DimensionsFormSection } from "./DimensionsFormSection";
 import { WeightFormSection } from "./WeightFormSection";
 import { PackerObjectTypes } from "../../commons/enums";
 import { UnitsFormSection } from "./UnitsFormSection";
-import {
-  faCircleInfo,
-  faWeightHanging,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type PackerObjectFormProps = {

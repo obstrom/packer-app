@@ -37,8 +37,8 @@ const Cube = () => {
     <mesh
       position={[0, 0, 0]}
       ref={ref}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}
+      onPointerOver={() => setHover(true)}
+      onPointerOut={() => setHover(false)}
     >
       <boxGeometry args={[2.5, 2.5, 2.5]} />
       {cubeSides.map((texture, id) => (
