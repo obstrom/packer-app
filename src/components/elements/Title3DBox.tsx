@@ -1,6 +1,6 @@
-import React, { Suspense, useRef, useState } from "react";
+import * as THREE from "three";
+import React, { Suspense, useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-// @ts-ignore
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import styled from "styled-components";
 
@@ -18,26 +18,25 @@ const Cube = () => {
     "textures/cube6.bmp",
   ]);
 
-  const mesh = useRef();
+  const ref = useRef<THREE.Mesh>(null!);
   const [hover, setHover] = useState(false);
 
   useFrame(() => {
-    // @ts-ignore
-    mesh.current.rotation.x = 0.4;
-
-    if (hover) {
-      // @ts-ignore
-      mesh.current.rotation.y += 0.02;
-    } else {
-      // @ts-ignore
-      mesh.current.rotation.y += 0.005;
-    }
+    hover
+      ? (ref.current.rotation.y += 0.02)
+      : (ref.current.rotation.y += 0.005);
   });
+
+  useEffect(() => {
+    // starting rotation position
+    ref.current.rotation.x = 0.4;
+    ref.current.rotation.y = 3.5;
+  }, []);
 
   return (
     <mesh
       position={[0, 0, 0]}
-      ref={mesh}
+      ref={ref}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}
     >
