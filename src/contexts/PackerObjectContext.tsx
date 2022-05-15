@@ -32,16 +32,17 @@ const PackerObjectProvider = (props: any) => {
   const removeItem = (id: string) =>
     setItems([...items.filter((item) => item.uuid != id)]);
   const updateItem = (updatedItem: Item) =>
-    setItems([
-      ...items.filter((item) => item.uuid != updatedItem.uuid),
-      updatedItem,
-    ]);
+    setItems(
+      items.map((item) => (item.uuid === updatedItem.uuid ? updatedItem : item))
+    );
 
   const addBin = (newBin: Bin) => setBins([...bins, newBin]);
   const removeBin = (id: string) =>
     setBins([...bins.filter((bin) => bin.uuid != id)]);
   const updateBin = (updatedBin: Bin) =>
-    setBins([...bins.filter((bin) => bin.uuid != updatedBin.uuid), updatedBin]);
+    setBins(
+      bins.map((bin) => (bin.uuid === updatedBin.uuid ? updatedBin : bin))
+    );
 
   const value: PackerObjectContextValue = {
     item: {

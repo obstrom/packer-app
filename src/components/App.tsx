@@ -55,7 +55,9 @@ function App() {
             <h5 className="text-black-50">TODO - Needs implementing:</h5>
             <ul className="text-black-50">
               <li>Detailed view for each container</li>
-              <li>Collapse upper portion on successful results</li>
+              <li>
+                {"Separate into three parts view; start -> select -> results"}
+              </li>
               <li>3D visuals</li>
             </ul>
           </div>
