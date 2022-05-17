@@ -64,8 +64,12 @@ export const PackerRequestFrame = () => {
 
           packerResponseContext?.setResults(data.boxes);
           packerResponseContext?.setVisData(data.visualizeData.containers);
-          packerResponseContext?.setResultsVolume(data.volume);
-          packerResponseContext?.incrementRequestCounter();
+
+          packerResponseContext?.setInfo({
+            resultsVolume: data.volume,
+            packingTime: data.packingTimeMs,
+            totalWeight: data.totalWeight,
+          });
         } catch (e: any) {
           if (data.message.includes("timeout")) {
             packerResponseContext?.setStatus(PackerJobResponseStatus.TIMEOUT);

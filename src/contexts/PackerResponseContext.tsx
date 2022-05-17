@@ -8,16 +8,20 @@ import { ResultContainer, VisContainer, ResultsVolume } from "../commons/types";
 import { PackerJobResponseStatus } from "../commons/enums";
 
 export interface PackerResponseContextValue {
-  status: PackerJobResponseStatus;
-  setStatus: Dispatch<SetStateAction<PackerJobResponseStatus>>;
-  requestCounter: number;
-  incrementRequestCounter: () => void;
   results: Array<ResultContainer>;
   setResults: Dispatch<SetStateAction<Array<ResultContainer>>>;
   visData: Array<VisContainer>;
   setVisData: Dispatch<SetStateAction<Array<VisContainer>>>;
+  status: PackerJobResponseStatus;
+  setStatus: Dispatch<SetStateAction<PackerJobResponseStatus>>;
+  info: ResultsInfo;
+  setInfo: Dispatch<SetStateAction<ResultsInfo>>;
+}
+
+export interface ResultsInfo {
   resultsVolume: ResultsVolume | null;
-  setResultsVolume: Dispatch<SetStateAction<ResultsVolume | null>>;
+  packingTime: number;
+  totalWeight: number;
 }
 
 const PackerResponseContext = createContext<PackerResponseContextValue | null>(
@@ -25,32 +29,29 @@ const PackerResponseContext = createContext<PackerResponseContextValue | null>(
 );
 
 const PackerResponseProvider = (props: any) => {
-  const [status, setStatus] = useState<PackerJobResponseStatus>(
-    PackerJobResponseStatus.NONE
-  );
-  const [requestCounter, setRequestCounter] = useState<number>(0);
   const [resultsContainers, setResultsContainers] = useState<
     Array<ResultContainer>
   >([]);
   const [visData, setVisData] = useState<Array<VisContainer>>([]);
-  const [resultsVolume, setResultsVolume] = useState<ResultsVolume | null>(
-    null
+  const [status, setStatus] = useState<PackerJobResponseStatus>(
+    PackerJobResponseStatus.NONE
   );
 
-  const incrementRequestCounter = (): void =>
-    setRequestCounter((prevState: number) => prevState++);
+  const [info, setInfo] = useState<ResultsInfo>({
+    resultsVolume: null,
+    packingTime: 0,
+    totalWeight: 0,
+  });
 
   const value: PackerResponseContextValue = {
-    status,
-    setStatus,
-    requestCounter,
-    incrementRequestCounter,
     results: resultsContainers,
     setResults: setResultsContainers,
     visData,
     setVisData,
-    resultsVolume,
-    setResultsVolume,
+    status,
+    setStatus,
+    info,
+    setInfo,
   };
 
   return (

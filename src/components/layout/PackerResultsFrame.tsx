@@ -8,9 +8,13 @@ import {
 } from "../../commons/types";
 import { PackerResponseContext } from "../../contexts/PackerResponseContext";
 import { PackerJobResponseStatus } from "../../commons/enums";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { PackerInfoAlert } from "../elements/PackerInfoAlert";
+import { ResultsDataSegment } from "../elements/ResultsDataSegment";
+import {
+  faBox,
+  faClipboardCheck,
+  faStopwatch,
+  faWeightHanging,
+} from "@fortawesome/free-solid-svg-icons";
 
 type PackerResultsFrameProps = {
   className?: string;
@@ -23,10 +27,18 @@ const Frame = styled(Stack)`
 const calcSpaceEfficiencyPercentage = (
   volume: ResultsVolume | undefined
 ): string => {
-  if (!volume) return "";
-  return `${Math.round(
-    (volume.totalJobVolumeUsed / volume.totalJobVolume) * 100
-  )}%`;
+  if (!volume) return "%";
+  const value = (volume.totalJobVolumeUsed / volume.totalJobVolume) * 100;
+  const roundedValue = Math.round(value);
+  return `${
+    roundedValue === 0
+      ? Math.round((value + Number.EPSILON) * 100) / 100
+      : roundedValue
+  }%`;
+};
+
+const renderWeight = (weight: number) => {
+  return weight > 999 ? `${weight / 1000} kg` : `${weight} g`;
 };
 
 export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
@@ -35,35 +47,41 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
   const packerResults: Array<ResultContainer> =
     packerResponseContext?.results ?? [];
   const visData: Array<VisContainer> = packerResponseContext?.visData ?? [];
-  const requestCounter: number = packerResponseContext?.requestCounter ?? 0;
   const status: PackerJobResponseStatus =
     packerResponseContext?.status ?? PackerJobResponseStatus.NONE;
   const volume: ResultsVolume | undefined =
-    packerResponseContext?.resultsVolume ?? undefined;
+    packerResponseContext?.info?.resultsVolume ?? undefined;
+  const totalWeight: number = packerResponseContext?.info?.totalWeight ?? 0;
+  const packingTime: number = packerResponseContext?.info?.packingTime ?? 0;
 
   return (
     <Frame className={className}>
       <h3>Packing results</h3>
       {status === PackerJobResponseStatus.SUCCESS && (
-        <>
-          <Col>
-            <h4>Overview:</h4>
-            <Row>
-              <p>{`Containers used: ${packerResults.length}`}</p>
-            </Row>
-          </Col>
-          <Col>
-            <h4>Optimization:</h4>
-            <Row>
-              <p>
-                {`Total container space used: ${calcSpaceEfficiencyPercentage(
-                  volume
-                )}
-            `}
-              </p>
-            </Row>
-          </Col>
-        </>
+        <Stack>
+          <Stack direction="horizontal" gap={4} className="mt-3">
+            <ResultsDataSegment
+              label="Packages"
+              value={packerResults.length.toString()}
+              icon={faBox}
+            />
+            <ResultsDataSegment
+              label="Total weight"
+              value={renderWeight(totalWeight)}
+              icon={faWeightHanging}
+            />
+            <ResultsDataSegment
+              label="Total space efficiency"
+              value={calcSpaceEfficiencyPercentage(volume)}
+              icon={faClipboardCheck}
+            />
+            <ResultsDataSegment
+              label="Packing time"
+              value={`${packingTime} ms`}
+              icon={faStopwatch}
+            />
+          </Stack>
+        </Stack>
       )}
     </Frame>
   );
