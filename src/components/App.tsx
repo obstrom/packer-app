@@ -12,8 +12,6 @@ import { PackerRequestFrame } from "./layout/PackerRequestFrame";
 import { PackerResponseProvider } from "../contexts/PackerResponseContext";
 import { PackerResultsFrame } from "./layout/PackerResultsFrame";
 
-// TODO - https://github.com/pmndrs/react-three-fiber
-
 const AppContainer = styled.div`
   background-color: #fff;
   min-width: 100vw;
