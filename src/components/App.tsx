@@ -13,6 +13,7 @@ import { PackerResponseProvider } from "../contexts/PackerResponseContext";
 import { PackerResultsFrame } from "./layout/PackerResultsFrame";
 
 const AppContainer = styled.div`
+  font-family: "Inter", sans-serif;
   background-color: #fff;
   min-width: 100vw;
   min-height: 100vh;
