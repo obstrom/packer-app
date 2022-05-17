@@ -51,8 +51,8 @@ export const PackerRequestFrame = () => {
     }
 
     // TODO - Fix lengthUnit and weightUnit - Right now API expects Global setting while front-end handles this per object
-    post("/pack", createPackerRequestBody(items, bins, "mm", "g")).then(
-      (data: any) => {
+    post("/pack", createPackerRequestBody(items, bins, "mm", "g"))
+      .then((data: any) => {
         console.log("Response data: ", data);
 
         try {
@@ -72,8 +72,11 @@ export const PackerRequestFrame = () => {
 
           packerResponseContext?.setStatus(PackerJobResponseStatus.ERROR);
         }
-      }
-    );
+      })
+      .catch((error) => {
+        console.error(error);
+        packerResponseContext?.setStatus(PackerJobResponseStatus.ERROR);
+      });
   };
 
   return (
