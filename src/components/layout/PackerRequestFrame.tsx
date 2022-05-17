@@ -16,6 +16,8 @@ import useFetch from "../../hooks/useFetch";
 import { createPackerRequestBody } from "../../commons/packerAPI";
 import { PackerResponseContext } from "../../contexts/PackerResponseContext";
 import { PackerJobResponseStatus } from "../../commons/enums";
+import { PackerStatusBadge } from "../elements/PackerStatusBadge";
+import { PackerInfoAlert } from "../elements/PackerInfoAlert";
 
 const Frame = styled(Stack)`
   background: #e8e8e8;
@@ -101,18 +103,28 @@ export const PackerRequestFrame = () => {
           </span>
         </Stack>
       </Alert>
+      <PackerInfoAlert />
       <div className="d-flex justify-content-center mb-2">
-        <Button
-          size="lg"
-          variant={hasObjects ? "primary" : "secondary"}
-          disabled={!hasObjects}
-          className="d-flex align-items-center"
-          onClick={() => sendToAPI()}
-        >
-          <FontAwesomeIcon icon={faBoxesPacking} />
-          <span className="ms-2">RUN PACKER</span>
-          {loading && <Spinner animation="border" size="sm" className="ms-2" />}
-        </Button>
+        <div>
+          <Button
+            size="lg"
+            variant={hasObjects ? "primary" : "secondary"}
+            disabled={!hasObjects}
+            className="d-flex align-items-center"
+            onClick={() => sendToAPI()}
+          >
+            <FontAwesomeIcon icon={faBoxesPacking} />
+            <span className="ms-2">RUN PACKER</span>
+            {loading && (
+              <Spinner animation="border" size="sm" className="ms-2" />
+            )}
+          </Button>
+        </div>
+        <div className="d-flex align-items-center">
+          <h5>
+            <PackerStatusBadge />
+          </h5>
+        </div>
       </div>
     </Frame>
   );
