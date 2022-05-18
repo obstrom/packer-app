@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import Stack from "react-bootstrap/Stack";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { IconProp, SizeProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+type ResultsDataSegmentSize = "sm" | "lg";
 
 type ResultsDataSegmentProps = {
   label: string;
   value: string;
+  size: ResultsDataSegmentSize;
   icon?: IconProp;
   className?: string;
 };
@@ -22,6 +25,7 @@ const Icon = styled(FontAwesomeIcon)`
 export const ResultsDataSegment = ({
   label,
   value,
+  size,
   icon,
   className,
 }: ResultsDataSegmentProps) => {
@@ -30,10 +34,20 @@ export const ResultsDataSegment = ({
       <Frame
         className={`rounded d-flex justify-content-center align-items-center py-2 ${className}`}
       >
-        {icon && <Icon icon={icon} className="me-3" size="2x" />}
-        <span className="fs-2">{value}</span>
+        {icon && (
+          <Icon
+            icon={icon}
+            className={size === "lg" ? "me-3" : "me-2"}
+            size={size === "lg" ? "2x" : "lg"}
+          />
+        )}
+        <span className={size === "lg" ? "fs-2" : "fs-4"}>{value}</span>
       </Frame>
-      <span className="text-center my-2 fs-5">{label}</span>
+      <span
+        className={`text-center ${size === "lg" ? "my-2 fs-5" : "my-1 fs-6"}`}
+      >
+        {label}
+      </span>
     </Stack>
   );
 };

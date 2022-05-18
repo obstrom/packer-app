@@ -15,6 +15,9 @@ import {
   faStopwatch,
   faWeightHanging,
 } from "@fortawesome/free-solid-svg-icons";
+import { Accordion } from "react-bootstrap";
+import { ResultPackagesAccordion } from "./ResultPackagesAccordion";
+import { calcSpaceEfficiencyPercentageFromResultsVolume } from "../../commons/displayCalculations";
 
 type PackerResultsFrameProps = {
   className?: string;
@@ -24,18 +27,9 @@ const Frame = styled(Stack)`
   background: #e8e8e8;
 `;
 
-const calcSpaceEfficiencyPercentage = (
-  volume: ResultsVolume | undefined
-): string => {
-  if (!volume) return "%";
-  const value = (volume.totalJobVolumeUsed / volume.totalJobVolume) * 100;
-  const roundedValue = Math.round(value);
-  return `${
-    roundedValue === 0
-      ? Math.round((value + Number.EPSILON) * 100) / 100
-      : roundedValue
-  }%`;
-};
+const PackagesFrame = styled(Stack)`
+  background: #d5d5d5;
+`;
 
 const renderWeight = (weight: number) => {
   return weight > 999 ? `${weight / 1000} kg` : `${weight} g`;
@@ -64,23 +58,31 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
               label="Packages"
               value={packerResults.length.toString()}
               icon={faBox}
+              size="lg"
             />
             <ResultsDataSegment
               label="Total weight"
               value={renderWeight(totalWeight)}
               icon={faWeightHanging}
+              size="lg"
             />
             <ResultsDataSegment
               label="Total space efficiency"
-              value={calcSpaceEfficiencyPercentage(volume)}
+              value={calcSpaceEfficiencyPercentageFromResultsVolume(volume)}
               icon={faClipboardCheck}
+              size="lg"
             />
             <ResultsDataSegment
               label="Packing time"
               value={`${packingTime} ms`}
               icon={faStopwatch}
+              size="lg"
             />
           </Stack>
+          <h4 className="my-2">Packages</h4>
+          <PackagesFrame className="rounded p-3">
+            <ResultPackagesAccordion resultsContainers={packerResults} />
+          </PackagesFrame>
         </Stack>
       )}
     </Frame>
