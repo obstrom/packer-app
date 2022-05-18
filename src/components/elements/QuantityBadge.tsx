@@ -1,17 +1,16 @@
 import React from "react";
 import Badge from "react-bootstrap/Badge";
-import { Item } from "../../commons/types";
 
 type QuantityBadgeProps = {
-  item: Item;
+  quantity: number;
   className?: string;
 };
 
-export const QuantityBadge = ({ item, className }: QuantityBadgeProps) => {
+export const QuantityBadge = ({ quantity, className }: QuantityBadgeProps) => {
   return (
     <Badge
       bg="light"
       className={`d-flex align-items-center text-dark ${className}`}
-    >{`x${item.quantity}`}</Badge>
+    >{`x${quantity}`}</Badge>
   );
 };

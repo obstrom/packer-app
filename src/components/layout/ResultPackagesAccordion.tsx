@@ -2,6 +2,9 @@ import React from "react";
 import { ResultContainer } from "../../commons/types";
 import { Accordion } from "react-bootstrap";
 import { ResultPackageHeaderInfo } from "./ResultPackageHeaderInfo";
+import { PackerObjectListItem } from "../elements/PackerObjectListItem";
+import { PackerObjectTypes } from "../../commons/enums";
+import { ResultPackageItem } from "../elements/ResultPackageItem";
 
 type ResultPackagesAccordionProps = {
   resultsContainers: Array<ResultContainer>;
@@ -40,8 +43,13 @@ export const ResultPackagesAccordion = ({
           </Accordion.Header>
           <Accordion.Body>
             <ResultPackageHeaderInfo container={container} />
+            <div className="mt-2">
+              <h5>Items overview:</h5>
+              {container.items.map((item, index) => (
+                <ResultPackageItem key={index} item={item} />
+              ))}
+            </div>
             {/*
-              TODO - API expose item data and map each item
               TODO - Implement and show 3D view of package
             */}
           </Accordion.Body>

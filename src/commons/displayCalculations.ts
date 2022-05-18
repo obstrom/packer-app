@@ -1,4 +1,9 @@
-import { ResultsVolume } from "./types";
+import { PackerObject, ResultsVolume } from "./types";
+import { lengthUnitToString } from "./enums";
+
+export const roundDecimalNumber = (n: number): number => {
+  return Math.round((n + Number.EPSILON) * 100) / 100;
+};
 
 export const calcSpaceEfficiencyPercentageFromResultsVolume = (
   volume: ResultsVolume | undefined
@@ -25,7 +30,23 @@ export const formatDecimalNumberToStringPercentage = (
 ): string => {
   const n = inputNumber * 100;
   const rounded = Math.round(n);
-  return `${
-    rounded === 0 ? Math.round((n + Number.EPSILON) * 100) / 100 : rounded
-  }%`;
+  return `${rounded === 0 ? roundDecimalNumber(n) : rounded}%`;
+};
+
+export const renderDimensions = (
+  width: number,
+  depth: number,
+  height: number,
+  unit?: string
+) => {
+  return `${width} x ${depth} x ${height} ${unit ? unit : ""}`;
+};
+
+export const renderPackerObjectDimensions = (o: PackerObject) => {
+  return renderDimensions(
+    o.width,
+    o.depth,
+    o.height,
+    lengthUnitToString(o.lengthUnit)
+  );
 };

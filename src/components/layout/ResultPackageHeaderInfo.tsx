@@ -8,7 +8,10 @@ import {
   faCubes,
   faWeightHanging,
 } from "@fortawesome/free-solid-svg-icons";
-import { formatDecimalNumberToStringPercentage } from "../../commons/displayCalculations";
+import {
+  formatDecimalNumberToStringPercentage,
+  roundDecimalNumber,
+} from "../../commons/displayCalculations";
 
 type ResultPackageHeaderInfoProps = {
   container: ResultContainer;
@@ -28,7 +31,9 @@ const renderDimensions = (container: ResultContainer): string => {
 
 const renderWeight = (container: ResultContainer): string => {
   const weight = container.totalWeight;
-  return weight > 999 ? weight + " kg" : weight + " g";
+  return weight > 999
+    ? roundDecimalNumber(weight / 1000) + " kg"
+    : weight + " g";
 };
 
 export const ResultPackageHeaderInfo = ({

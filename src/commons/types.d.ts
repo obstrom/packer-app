@@ -62,7 +62,8 @@ interface ResultContainer {
   volumeUsedPercentage: number;
   totalWeight: number;
   content: ResultContainerContent;
-  dimensions: ResultContainerDimensions;
+  dimensions: ResultObjectDimensions;
+  items: Array<ResultItem>;
 }
 
 interface ResultContainerContent {
@@ -72,11 +73,17 @@ interface ResultContainerContent {
   weightLeftToMaxWeight: number;
 }
 
-interface ResultContainerDimensions {
+interface ResultObjectDimensions {
   width: number;
   depth: number;
   height: number;
   // TODO - Add and handle length unit type ?
+}
+
+interface ResultItem {
+  description: string;
+  dimensions: ResultObjectDimensions;
+  quantity: number;
 }
 
 interface VisContainer {

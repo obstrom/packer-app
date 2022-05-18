@@ -8,6 +8,7 @@ import { lengthUnitToString, PackerObjectTypes } from "../../commons/enums";
 import Button from "react-bootstrap/Button";
 import { QuantityBadge } from "./QuantityBadge";
 import { EditObjectFormModal } from "../form/EditObjectFormModal";
+import { renderPackerObjectDimensions } from "../../commons/displayCalculations";
 
 type PackerObjectBadgeProps = {
   object: Bin | Item;
@@ -21,12 +22,6 @@ const BadgeContainer = styled(Stack)`
   background: ${(props) => (props.type === "bin" ? "#313131" : "#606060")};
   color: #fff;
 `;
-
-const renderDimensions = (o: PackerObject) => {
-  return `${o.width} x ${o.depth} x ${o.height} ${lengthUnitToString(
-    o.lengthUnit
-  )}`;
-};
 
 export const PackerObjectListItem = ({
   object,
@@ -46,9 +41,11 @@ export const PackerObjectListItem = ({
       className={`${className} p-2 my-1 rounded justify-content-between`}
     >
       <div className="d-flex">
-        {type === "item" && <QuantityBadge item={object as Item} />}
+        {type === "item" && (
+          <QuantityBadge quantity={(object as Item).quantity} />
+        )}
         <span className="flex-grow-1 px-2 border-end">
-          {renderDimensions(object)}
+          {renderPackerObjectDimensions(object)}
         </span>
         <span className="px-2 text-truncate d-inline-block">
           <em>{object.description}</em>
