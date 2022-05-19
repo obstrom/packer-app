@@ -8,7 +8,7 @@ import { Footer } from "./layout/Footer";
 import { StartView } from "./layout/StartView";
 import { SetupView } from "./layout/SetupView";
 import { ResultsView } from "./layout/ResultsView";
-import { PageTitle } from "./elements/PageTitle";
+import { AppLogo } from "./elements/AppLogo";
 
 const AppContainer = styled.div`
   font-family: "Inter", sans-serif;
@@ -27,7 +27,7 @@ function App() {
           {viewStatus === AppViewStatus.START && (
             <StartView setViewStatus={setViewStatus} />
           )}
-          {viewStatus !== AppViewStatus.START && <PageTitle text={"PackMe"} />}
+          {viewStatus !== AppViewStatus.START && <AppLogo />}
           {viewStatus === AppViewStatus.SETUP && (
             <SetupView setViewStatus={setViewStatus} />
           )}
