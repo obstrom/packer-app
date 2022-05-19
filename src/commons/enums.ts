@@ -108,3 +108,9 @@ export const stringToPackerJobResponseStatus = (
       return "";
   }
 };
+
+export const enum AppViewStatus {
+  START = "start",
+  SETUP = "setup",
+  RESULTS = "results",
+}

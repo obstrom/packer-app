@@ -50,7 +50,7 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
 
   return (
     <Frame className={className}>
-      <h3>Packing results</h3>
+      <h3 className="fs-2">Packing results</h3>
       {status === PackerJobResponseStatus.SUCCESS && (
         <Stack>
           <Stack direction="horizontal" gap={4} className="mt-3">

@@ -18,11 +18,7 @@ export const PackerStatusBadge = ({ className }: PackerStatusBadgeProps) => {
 
   switch (status) {
     case PackerJobResponseStatus.SUCCESS:
-      return (
-        <Badge className={`ms-2 ${className}`} bg="success">
-          Success
-        </Badge>
-      );
+      return null;
     case PackerJobResponseStatus.FAILURE:
       return (
         <Badge className={`ms-2 ${className}`} bg="danger">

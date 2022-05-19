@@ -4,6 +4,7 @@ import { Bin, Item } from "../commons/types";
 export interface PackerObjectContextValue {
   item: ItemContextValue;
   bin: BinContextValue;
+  clearAll: () => void;
 }
 
 interface ItemContextValue {
@@ -44,6 +45,11 @@ const PackerObjectProvider = (props: any) => {
       bins.map((bin) => (bin.uuid === updatedBin.uuid ? updatedBin : bin))
     );
 
+  const clearAll = () => {
+    setBins([]);
+    setItems([]);
+  };
+
   const value: PackerObjectContextValue = {
     item: {
       get: items,
@@ -57,6 +63,7 @@ const PackerObjectProvider = (props: any) => {
       remove: removeBin,
       update: updateBin,
     },
+    clearAll,
   };
 
   return (

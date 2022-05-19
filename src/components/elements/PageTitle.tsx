@@ -6,7 +6,7 @@ type PageTitleProps = {
   text: string;
 };
 
-const Title = styled.h1`
+const Title = styled.h1<any>`
   color: #3b3b3b;
   font-size: 4rem;
   text-shadow: 0 0.2rem 0.3rem rgb(0 0 0 / 45%);

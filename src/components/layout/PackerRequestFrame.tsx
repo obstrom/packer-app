@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import styled from "styled-components";
 import Stack from "react-bootstrap/Stack";
 import Button from "react-bootstrap/Button";
@@ -15,9 +15,14 @@ import {
 import useFetch from "../../hooks/useFetch";
 import { createPackerRequestBody } from "../../commons/packerAPI";
 import { PackerResponseContext } from "../../contexts/PackerResponseContext";
-import { PackerJobResponseStatus } from "../../commons/enums";
+import { AppViewStatus, PackerJobResponseStatus } from "../../commons/enums";
 import { PackerStatusBadge } from "../elements/PackerStatusBadge";
 import { PackerInfoAlert } from "../elements/PackerInfoAlert";
+import { PackerRestartButton } from "../controls/PackerRestartButton";
+
+type PackerRequestFrameProps = {
+  setViewStatus: Dispatch<SetStateAction<AppViewStatus>>;
+};
 
 const Frame = styled(Stack)`
   background: #e8e8e8;
@@ -34,7 +39,9 @@ const renderItemQuantities = (items: Array<Item>): string => {
   return qty === 1 ? "one item" : `${qty} items`;
 };
 
-export const PackerRequestFrame = () => {
+export const PackerRequestFrame = ({
+  setViewStatus,
+}: PackerRequestFrameProps) => {
   const { post, loading } = useFetch(process.env.REACT_APP_API_BASE_URL ?? "");
 
   const packerObjectContext = useContext(PackerObjectContext);
@@ -58,10 +65,6 @@ export const PackerRequestFrame = () => {
         console.log("Response data: ", data);
 
         try {
-          data.boxes.length > 0
-            ? packerResponseContext?.setStatus(PackerJobResponseStatus.SUCCESS)
-            : packerResponseContext?.setStatus(PackerJobResponseStatus.FAILURE);
-
           packerResponseContext?.setResults(data.boxes);
           packerResponseContext?.setVisData(data.visualizeData.containers);
 
@@ -70,6 +73,14 @@ export const PackerRequestFrame = () => {
             packingTime: data.packingTimeMs,
             totalWeight: data.totalWeight,
           });
+
+          if (data.boxes.length === 0) {
+            packerResponseContext?.setStatus(PackerJobResponseStatus.FAILURE);
+            return;
+          }
+
+          packerResponseContext?.setStatus(PackerJobResponseStatus.SUCCESS);
+          setViewStatus(AppViewStatus.RESULTS);
         } catch (e: any) {
           if (data.message.includes("timeout")) {
             packerResponseContext?.setStatus(PackerJobResponseStatus.TIMEOUT);
@@ -87,7 +98,7 @@ export const PackerRequestFrame = () => {
 
   return (
     <Frame className="rounded border p-2" direction="vertical">
-      <Alert variant={hasObjects ? "info" : "dark"}>
+      <Alert variant={hasObjects ? "light" : "dark"}>
         <Stack direction="horizontal" gap={3}>
           <FontAwesomeIcon
             size="2x"
@@ -129,6 +140,9 @@ export const PackerRequestFrame = () => {
             <PackerStatusBadge />
           </h5>
         </div>
+      </div>
+      <div className="d-flex justify-content-center mb-2">
+        <PackerRestartButton isDisabled={!hasObjects} />
       </div>
     </Frame>
   );

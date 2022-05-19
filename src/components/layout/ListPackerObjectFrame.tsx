@@ -11,6 +11,11 @@ const EmptyAccordionButton = styled.div`
   }
 `;
 
+const ScrollableAccordionBody = styled(Accordion.Body)`
+  max-height: 26.1rem;
+  overflow-y: auto;
+`;
+
 type ListPackerObjectFrameProps = {
   headerTitle: string;
   packerObjectType: PackerObjectTypes;
@@ -49,7 +54,7 @@ export const ListPackerObjectFrame = ({
         <Accordion className={className} defaultActiveKey="0">
           <Accordion.Item eventKey="0">
             <Accordion.Header>{headerTitleAmount}</Accordion.Header>
-            <Accordion.Body>
+            <ScrollableAccordionBody>
               {typedPackerObjectContext?.get.map((object, index) => (
                 <PackerObjectListItem
                   key={index}
@@ -59,7 +64,7 @@ export const ListPackerObjectFrame = ({
                   deleteObject={typedPackerObjectContext?.remove}
                 />
               ))}
-            </Accordion.Body>
+            </ScrollableAccordionBody>
           </Accordion.Item>
         </Accordion>
       )}
