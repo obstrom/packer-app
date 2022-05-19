@@ -46,19 +46,21 @@ const Cube = () => {
           key={texture.id}
           attach={`material-${id}`}
           map={texture}
+          metalness={1}
+          roughness={0.9}
         />
       ))}
     </mesh>
   );
 };
 
-export const Title3DBox = () => {
+export const Logo3DBox = () => {
   return (
     <CanvasContainer>
       <Canvas>
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={0.4} />
+          <pointLight position={[0, 7.5, 10]} intensity={1.5} />
           <Cube />
         </Suspense>
       </Canvas>

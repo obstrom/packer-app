@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { Title3DBox } from "./Title3DBox";
+import { Logo3DBox } from "./Logo3DBox";
 import { AppViewStatus } from "../../commons/enums";
-import App from "../App";
 import { themeColors } from "../../commons/colors";
+import Container from "react-bootstrap/Container";
 
 type AppLogoProps = {
   setViewStatus: Dispatch<SetStateAction<AppViewStatus>>;
@@ -17,6 +17,7 @@ const Title = styled.h1<any>`
 
 const ClickableFrame = styled.div`
   cursor: pointer;
+  user-select: none;
 `;
 
 const TitlePack = styled.span<any>`
@@ -25,18 +26,22 @@ const TitlePack = styled.span<any>`
 
 export const AppLogo = ({ setViewStatus }: AppLogoProps) => {
   return (
-    <ClickableFrame
-      className="d-flex justify-content-center align-items-center"
-      onClick={() => setViewStatus(AppViewStatus.START)}
-    >
-      <Title3DBox />
-      <Title className="text-center py-4 fw-light">
-        Com
-        <TitlePack className="fw-bold" themeColors={themeColors}>
-          pack
-        </TitlePack>
-        ed
-      </Title>
-    </ClickableFrame>
+    <Container fluid="sm">
+      <div
+        className="d-flex justify-content-center align-items-center"
+        onClick={() => setViewStatus(AppViewStatus.START)}
+      >
+        <ClickableFrame className="d-flex justify-content-center align-items-center pe-4">
+          <Logo3DBox />
+          <Title className="text-center py-4 fw-light">
+            Com
+            <TitlePack className="fw-bold" themeColors={themeColors}>
+              pack
+            </TitlePack>
+            ed
+          </Title>
+        </ClickableFrame>
+      </div>
+    </Container>
   );
 };
