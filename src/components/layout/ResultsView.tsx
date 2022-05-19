@@ -18,7 +18,7 @@ const BackButton = styled.div`
 export const ResultsView = ({ setViewStatus, className }: ResultsViewProps) => {
   return (
     <>
-      <Container fluid="sm">
+      <Container fluid="sm" className="pb-4">
         <BackButton
           className="d-flex align-items-center fs-2 fw-normal p-2"
           onClick={() => setViewStatus(AppViewStatus.SETUP)}

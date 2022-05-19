@@ -16,7 +16,7 @@ const AccordionBody = styled<any>(Accordion.Body)`
 `;
 
 const AccordionItem = styled<any>(Accordion.Item)`
-  border-color: ${(props) => props.themeColors.primary};
+  border-color: rgb(132, 50, 18);
 `;
 
 const renderHeaderTitle = (index: number, container: ResultContainer) => {
@@ -32,7 +32,7 @@ const renderHeaderTitle = (index: number, container: ResultContainer) => {
 
   return (
     <span>
-      <strong>{`${n}`}</strong>
+      <strong>{`Package #${n}`}</strong>
       {` | `}
       <em>{!desc ? dimensions : desc}</em>
     </span>
@@ -54,17 +54,17 @@ export const ResultPackagesAccordion = ({
           <style type="text/css">
             {`
               .accordion-button {
-                background-color: ${themeColors.secondary};
+                background-color: ${themeColors.secondaryDark};
                 color: ${themeColors.textMd};
               }
               
               .accordion-button:hover {
-                background-color: ${themeColors.secondaryDark};
+                background-color: ${themeColors.secondaryDarkDesat};
                 color: ${themeColors.textMd};
               }
               
               .accordion-button:not(.collapsed) {
-                background-color: ${themeColors.secondaryDark};
+                background-color: ${themeColors.secondaryDarkDesat};
                 color: ${themeColors.textMd};
               }
               

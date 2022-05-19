@@ -81,7 +81,7 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
             />
           </Stack>
           <h4 className="my-2">Packages</h4>
-          <PackagesFrame className="rounded p-3" themeColors={themeColors}>
+          <PackagesFrame className="rounded" themeColors={themeColors}>
             <ResultPackagesAccordion resultsContainers={packerResults} />
           </PackagesFrame>
         </Stack>

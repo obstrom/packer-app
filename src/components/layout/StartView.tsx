@@ -18,7 +18,7 @@ const Frame = styled<any>(Container)`
 
 export const StartView = ({ setViewStatus, className }: StartViewProps) => {
   return (
-    <div className={`${className} mt-5`}>
+    <div className={`${className} mt-5 pb-4`}>
       <Frame
         themeColors={themeColors}
         fluid="sm"
