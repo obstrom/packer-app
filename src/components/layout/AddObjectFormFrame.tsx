@@ -20,13 +20,14 @@ import { ButtonGroup } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBoxOpen, faGifts } from "@fortawesome/free-solid-svg-icons";
+import { themeColors } from "../../commons/colors";
 
 type AddObjectContainerProps = {
   className?: string;
 };
 
-const Frame = styled(Container)`
-  background: #e8e8e8;
+const Frame = styled<any>(Container)`
+  background-color: ${(props) => props.themeColors.secondary};
 `;
 
 const submitFormAction = (
@@ -72,15 +73,32 @@ export const AddObjectContainer = ({ className }: AddObjectContainerProps) => {
   const packerObjectContext = useContext(PackerObjectContext);
 
   return (
-    <Frame className={className}>
+    <Frame className={className} themeColors={themeColors}>
       <h3>Add packing object</h3>
+      <style type="text/css">
+        {`
+            .btn-brand {
+              background-color: ${themeColors.brandDarker};
+              font-weight: 500;
+              color: ${themeColors.textInverted};
+            }
+            
+            .btn-unselected {
+              background-color: ${themeColors.secondaryDark};
+            }
+            
+            .btn-unselected:hover {
+              background-color: ${themeColors.secondaryDarkDesat};
+            }
+        `}
+      </style>
       <ButtonGroup className="mt-2 mb-4">
         <Button
           type="button"
           size="lg"
           disabled={formType === PackerObjectTypes.BIN}
           onClick={() => setFormType(PackerObjectTypes.BIN)}
-          variant={formType === PackerObjectTypes.BIN ? "primary" : "light"}
+          variant={formType === PackerObjectTypes.BIN ? "brand" : "unselected"}
           className="d-flex align-items-center"
         >
           <FontAwesomeIcon icon={faBoxOpen} />
@@ -91,7 +109,7 @@ export const AddObjectContainer = ({ className }: AddObjectContainerProps) => {
           size="lg"
           disabled={formType === PackerObjectTypes.ITEM}
           onClick={() => setFormType(PackerObjectTypes.ITEM)}
-          variant={formType === PackerObjectTypes.ITEM ? "primary" : "light"}
+          variant={formType === PackerObjectTypes.ITEM ? "brand" : "unselected"}
         >
           <FontAwesomeIcon icon={faGifts} />
           <span className="ms-2">Item</span>

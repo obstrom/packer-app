@@ -19,13 +19,15 @@ import { AppViewStatus, PackerJobResponseStatus } from "../../commons/enums";
 import { PackerStatusBadge } from "../elements/PackerStatusBadge";
 import { PackerInfoAlert } from "../elements/PackerInfoAlert";
 import { PackerRestartButton } from "../controls/PackerRestartButton";
+import { themeColors } from "../../commons/colors";
+import { StandardButton } from "../controls/StandardButton";
 
 type PackerRequestFrameProps = {
   setViewStatus: Dispatch<SetStateAction<AppViewStatus>>;
 };
 
-const Frame = styled(Stack)`
-  background: #e8e8e8;
+const Frame = styled<any>(Stack)`
+  background: ${(props) => props.themeColors.secondary};
 `;
 
 const calcHasObjects = (items: Array<Item>, bins: Array<Bin>): boolean =>
@@ -97,8 +99,12 @@ export const PackerRequestFrame = ({
   };
 
   return (
-    <Frame className="rounded border p-2" direction="vertical">
-      <Alert variant={hasObjects ? "light" : "dark"}>
+    <Frame
+      className="rounded border p-2"
+      direction="vertical"
+      themeColors={themeColors}
+    >
+      <Alert variant={hasObjects ? "light" : "dark"} className="mb-2">
         <Stack direction="horizontal" gap={3}>
           <FontAwesomeIcon
             size="2x"
@@ -118,12 +124,12 @@ export const PackerRequestFrame = ({
           </span>
         </Stack>
       </Alert>
-      <PackerInfoAlert />
-      <div className="d-flex justify-content-center mb-2">
+      <PackerInfoAlert className="mb-2" />
+      <div className="d-flex justify-content-center my-2">
         <div>
-          <Button
+          <StandardButton
             size="lg"
-            variant={hasObjects ? "primary" : "secondary"}
+            variant={hasObjects ? "brand" : "secondary"}
             disabled={!hasObjects}
             className="d-flex align-items-center"
             onClick={() => sendToAPI()}
@@ -133,16 +139,12 @@ export const PackerRequestFrame = ({
             {loading && (
               <Spinner animation="border" size="sm" className="ms-2" />
             )}
-          </Button>
-        </div>
-        <div className="d-flex align-items-center">
-          <h5>
             <PackerStatusBadge />
-          </h5>
+          </StandardButton>
         </div>
       </div>
       <div className="d-flex justify-content-center mb-2">
-        <PackerRestartButton isDisabled={!hasObjects} />
+        <PackerRestartButton />
       </div>
     </Frame>
   );

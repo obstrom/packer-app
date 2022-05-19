@@ -17,6 +17,7 @@ import { PackerObjectTypes } from "../../commons/enums";
 import { UnitsFormSection } from "./UnitsFormSection";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { StandardButton } from "../controls/StandardButton";
 
 type PackerObjectFormProps = {
   formType: PackerObjectTypes;
@@ -98,11 +99,15 @@ export const PackerObjectForm = ({
       </Col>
       <Col className="d-flex justify-content-end">
         {allowReset && (
-          <Button className="btn-secondary mx-2" onClick={handleOnReset}>
+          <StandardButton
+            className="mx-2"
+            onClick={handleOnReset}
+            variant="secondary"
+          >
             Reset
-          </Button>
+          </StandardButton>
         )}
-        <Button type="submit">{submitButtonLabel}</Button>
+        <StandardButton type="submit">{submitButtonLabel}</StandardButton>
       </Col>
     </Form>
   );

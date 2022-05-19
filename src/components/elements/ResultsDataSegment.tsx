@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Stack from "react-bootstrap/Stack";
 import { IconProp, SizeProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { themeColors } from "../../commons/colors";
 
 type ResultsDataSegmentSize = "sm" | "lg";
 
@@ -14,8 +15,8 @@ type ResultsDataSegmentProps = {
   className?: string;
 };
 
-const Frame = styled.div`
-  background: #c4c4c4;
+const Frame = styled.div<any>`
+  background: #fff;
 `;
 
 const Icon = styled(FontAwesomeIcon)`
@@ -33,6 +34,7 @@ export const ResultsDataSegment = ({
     <Stack className={className}>
       <Frame
         className={`rounded d-flex justify-content-center align-items-center py-2 ${className}`}
+        themeColors={themeColors}
       >
         {icon && (
           <Icon

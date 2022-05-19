@@ -9,10 +9,11 @@ import { StartView } from "./layout/StartView";
 import { SetupView } from "./layout/SetupView";
 import { ResultsView } from "./layout/ResultsView";
 import { AppLogo } from "./elements/AppLogo";
+import { themeColors } from "../commons/colors";
 
-const AppContainer = styled.div`
+const AppContainer = styled.div<any>`
   font-family: "Inter", sans-serif;
-  background-color: #fff;
+  background-color: ${(props) => props.themeColors.lightSecondary};
   min-width: 100vw;
   min-height: 100vh;
 `;
@@ -23,11 +24,11 @@ function App() {
   return (
     <PackerObjectProvider>
       <PackerResponseProvider>
-        <AppContainer className="pb-5">
+        <AppContainer className="pb-5" themeColors={themeColors}>
+          <AppLogo setViewStatus={setViewStatus} />
           {viewStatus === AppViewStatus.START && (
             <StartView setViewStatus={setViewStatus} />
           )}
-          {viewStatus !== AppViewStatus.START && <AppLogo />}
           {viewStatus === AppViewStatus.SETUP && (
             <SetupView setViewStatus={setViewStatus} />
           )}

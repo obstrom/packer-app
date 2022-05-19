@@ -6,16 +6,30 @@ import { AddObjectContainer } from "./AddObjectFormFrame";
 import { ListPackerObjectFrame } from "./ListPackerObjectFrame";
 import { AppViewStatus, PackerObjectTypes } from "../../commons/enums";
 import { PackerRequestFrame } from "./PackerRequestFrame";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 type SetupViewProps = {
   setViewStatus: Dispatch<SetStateAction<AppViewStatus>>;
   className?: string;
 };
 
+const BackButton = styled.div`
+  cursor: pointer;
+`;
+
 export const SetupView = ({ setViewStatus, className }: SetupViewProps) => {
   return (
     <>
       <Container fluid="sm">
+        <BackButton
+          className="d-flex align-items-center fs-2 fw-normal p-2"
+          onClick={() => setViewStatus(AppViewStatus.START)}
+        >
+          <FontAwesomeIcon icon={faChevronLeft} className="fs-3" />
+          <span className="ms-2">Intro</span>
+        </BackButton>
         <Row>
           <Col className="mb-4">
             <Row>

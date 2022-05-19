@@ -1,20 +1,42 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { Title3DBox } from "./Title3DBox";
+import { AppViewStatus } from "../../commons/enums";
+import App from "../App";
+import { themeColors } from "../../commons/colors";
+
+type AppLogoProps = {
+  setViewStatus: Dispatch<SetStateAction<AppViewStatus>>;
+};
 
 const Title = styled.h1<any>`
   color: #3b3b3b;
   font-size: 4rem;
-  text-shadow: 0 0.2rem 0.3rem rgb(0 0 0 / 45%);
+  text-shadow: 0 0 0.2rem rgb(0 0 0 / 40%);
 `;
 
-export const AppLogo = () => {
+const ClickableFrame = styled.div`
+  cursor: pointer;
+`;
+
+const TitlePack = styled.span<any>`
+  color: ${(props) => props.themeColors.brand};
+`;
+
+export const AppLogo = ({ setViewStatus }: AppLogoProps) => {
   return (
-    <div className="d-flex justify-content-center align-items-center">
+    <ClickableFrame
+      className="d-flex justify-content-center align-items-center"
+      onClick={() => setViewStatus(AppViewStatus.START)}
+    >
       <Title3DBox />
       <Title className="text-center py-4 fw-light">
-        Com<span className="fw-bold">pack</span>ed
+        Com
+        <TitlePack className="fw-bold" themeColors={themeColors}>
+          pack
+        </TitlePack>
+        ed
       </Title>
-    </div>
+    </ClickableFrame>
   );
 };

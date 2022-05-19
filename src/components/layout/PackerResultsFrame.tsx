@@ -18,17 +18,18 @@ import {
 import { Accordion } from "react-bootstrap";
 import { ResultPackagesAccordion } from "./ResultPackagesAccordion";
 import { calcSpaceEfficiencyPercentageFromResultsVolume } from "../../commons/displayCalculations";
+import { themeColors } from "../../commons/colors";
 
 type PackerResultsFrameProps = {
   className?: string;
 };
 
-const Frame = styled(Stack)`
-  background: #e8e8e8;
+const Frame = styled<any>(Stack)`
+  background: ${(props) => props.themeColors.secondary};
 `;
 
-const PackagesFrame = styled(Stack)`
-  background: #d5d5d5;
+const PackagesFrame = styled<any>(Stack)`
+  background: #fff;
 `;
 
 const renderWeight = (weight: number) => {
@@ -49,7 +50,7 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
   const packingTime: number = packerResponseContext?.info?.packingTime ?? 0;
 
   return (
-    <Frame className={className}>
+    <Frame className={className} themeColors={themeColors}>
       <h3 className="fs-2">Packing results</h3>
       {status === PackerJobResponseStatus.SUCCESS && (
         <Stack>
@@ -80,7 +81,7 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
             />
           </Stack>
           <h4 className="my-2">Packages</h4>
-          <PackagesFrame className="rounded p-3">
+          <PackagesFrame className="rounded p-3" themeColors={themeColors}>
             <ResultPackagesAccordion resultsContainers={packerResults} />
           </PackagesFrame>
         </Stack>

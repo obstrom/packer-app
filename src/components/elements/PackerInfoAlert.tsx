@@ -24,11 +24,11 @@ export const PackerInfoAlert = ({ className }: PackerInfoAlertProps) => {
   switch (status) {
     case PackerJobResponseStatus.FAILURE:
       text =
-        "Could not find any packing solution for this job. Most likely the items does not fit the container(s).";
+        "Could not find any packing solution for this job. Most likely the items does not fit the container(s). Edit your job and then try again.";
       break;
     case PackerJobResponseStatus.TIMEOUT:
       text =
-        "Packing request timed out. Try reducing the amount of containers and items.";
+        "Packing request timed out. Try reducing the amount of containers and items. Then try again.";
       break;
     case PackerJobResponseStatus.ERROR:
       text = "Something went wrong! Please try again.";

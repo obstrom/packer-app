@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import styled from "styled-components";
+import { themeColors } from "../../commons/colors";
 
 type FooterProps = {
   className?: string;
@@ -16,9 +17,14 @@ const CreditTextSmall = styled.p`
   font-size: 0.8rem;
 `;
 
-const CreditLink = styled.a`
+const CreditLink = styled.a<any>`
   color: #3b3b3b;
   font-weight: bold;
+  &:hover,
+  &:active,
+  &:focus {
+    color: ${(props) => props.themeColors.brand};
+  }
 `;
 
 export const Footer = ({ className }: FooterProps) => {
@@ -27,7 +33,10 @@ export const Footer = ({ className }: FooterProps) => {
       <div className="p-2">
         <CreditText className="text-center">
           <span>{"Created by "}</span>
-          <CreditLink href="https://github.com/obstrom">
+          <CreditLink
+            href="https://github.com/obstrom"
+            themeColors={themeColors}
+          >
             Oscar Bergström
           </CreditLink>
           <span>{". Last updated 05-2022"}</span>
@@ -40,7 +49,10 @@ export const Footer = ({ className }: FooterProps) => {
           </span>
           <span>{"Queries a "}</span>
           <br />
-          <CreditLink href="https://github.com/obstrom/packer-app-api">
+          <CreditLink
+            href="https://github.com/obstrom/packer-app-api"
+            themeColors={themeColors}
+          >
             Java Spring Boot API
           </CreditLink>
           <span>
@@ -52,7 +64,10 @@ export const Footer = ({ className }: FooterProps) => {
               "The API relies upon and extends the open-source bin packing package "
             }
           </span>
-          <CreditLink href="https://github.com/skjolber/3d-bin-container-packing">
+          <CreditLink
+            href="https://github.com/skjolber/3d-bin-container-packing"
+            themeColors={themeColors}
+          >
             3d-bin-container-packing
           </CreditLink>
           <span>{"."}</span>

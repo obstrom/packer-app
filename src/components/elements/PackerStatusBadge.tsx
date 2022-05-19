@@ -22,19 +22,19 @@ export const PackerStatusBadge = ({ className }: PackerStatusBadgeProps) => {
     case PackerJobResponseStatus.FAILURE:
       return (
         <Badge className={`ms-2 ${className}`} bg="danger">
-          Failure
+          Failure!
         </Badge>
       );
     case PackerJobResponseStatus.TIMEOUT:
       return (
         <Badge className={`ms-2 ${className}`} bg="danger">
-          Timeout
+          Timeout!
         </Badge>
       );
     case PackerJobResponseStatus.ERROR:
       return (
         <Badge className={`ms-2 ${className}`} bg="danger">
-          Error
+          Error!
         </Badge>
       );
     case PackerJobResponseStatus.NONE:

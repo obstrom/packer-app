@@ -13,6 +13,8 @@ import {
   PackerObjectFormData,
   PackerObjectFormError,
 } from "../../commons/packerObjectForm";
+import styled from "styled-components";
+import { themeColors } from "../../commons/colors";
 
 type EditObjectFormModalProps = {
   show: boolean;
@@ -21,6 +23,14 @@ type EditObjectFormModalProps = {
   object: Item | Bin;
   updateObject: ((updatedItem: Item) => void) | ((updatedBin: Bin) => void);
 };
+
+const ModalHeader = styled<any>(Modal.Header)`
+  background: ${(props) => props.themeColors.secondaryDark};
+`;
+
+const ModalBody = styled<any>(Modal.Body)`
+  background: ${(props) => props.themeColors.secondary};
+`;
 
 const renderTypeTitle = (type: PackerObjectTypes): string => {
   return type === PackerObjectTypes.BIN ? "container" : type;
@@ -85,10 +95,10 @@ export const EditObjectFormModal = ({
 
   return (
     <Modal show={show} onHide={handleClose} centered>
-      <Modal.Header closeButton>
+      <ModalHeader themeColors={themeColors} closeButton>
         <Modal.Title>{`Edit ${renderTypeTitle(type)}`}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="p-4">
+      </ModalHeader>
+      <ModalBody themeColors={themeColors} className="p-4">
         <PackerObjectForm
           formType={type}
           formData={formData}
@@ -108,7 +118,7 @@ export const EditObjectFormModal = ({
           }
           allowReset={false}
         />
-      </Modal.Body>
+      </ModalBody>
     </Modal>
   );
 };
