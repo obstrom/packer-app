@@ -11,6 +11,7 @@ import { PackerObjectProvider } from "../contexts/PackerObjectContext";
 import { PackerRequestFrame } from "./layout/PackerRequestFrame";
 import { PackerResponseProvider } from "../contexts/PackerResponseContext";
 import { PackerResultsFrame } from "./layout/PackerResultsFrame";
+import { Footer } from "./layout/Footer";
 
 const AppContainer = styled.div`
   font-family: "Inter", sans-serif;
@@ -23,7 +24,7 @@ function App() {
   return (
     <PackerObjectProvider>
       <PackerResponseProvider>
-        <AppContainer>
+        <AppContainer className="pb-5">
           <PageTitle text={"PackMe"} />
           <Container fluid="sm">
             <Row className="mb-4">
@@ -50,16 +51,7 @@ function App() {
               </Col>
             </Row>
           </Container>
-          <div className="p-4 mt-4">
-            <h5 className="text-black-50">TODO - Needs implementing:</h5>
-            <ul className="text-black-50">
-              <li>Detailed view for each container</li>
-              <li>
-                {"Separate into three parts view; start -> select -> results"}
-              </li>
-              <li>3D visuals</li>
-            </ul>
-          </div>
+          <Footer className="mt-4" />
         </AppContainer>
       </PackerResponseProvider>
     </PackerObjectProvider>

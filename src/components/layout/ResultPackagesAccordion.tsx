@@ -2,8 +2,6 @@ import React from "react";
 import { ResultContainer } from "../../commons/types";
 import { Accordion } from "react-bootstrap";
 import { ResultPackageHeaderInfo } from "./ResultPackageHeaderInfo";
-import { PackerObjectListItem } from "../elements/PackerObjectListItem";
-import { PackerObjectTypes } from "../../commons/enums";
 import { ResultPackageItem } from "../elements/ResultPackageItem";
 
 type ResultPackagesAccordionProps = {
