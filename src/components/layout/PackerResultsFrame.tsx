@@ -15,7 +15,6 @@ import {
   faStopwatch,
   faWeightHanging,
 } from "@fortawesome/free-solid-svg-icons";
-import { Accordion } from "react-bootstrap";
 import { ResultPackagesAccordion } from "./ResultPackagesAccordion";
 import { calcSpaceEfficiencyPercentageFromResultsVolume } from "../../commons/displayCalculations";
 import { themeColors } from "../../commons/colors";
@@ -82,7 +81,10 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
           </Stack>
           <h4 className="my-2">Packages</h4>
           <PackagesFrame className="rounded" themeColors={themeColors}>
-            <ResultPackagesAccordion resultsContainers={packerResults} />
+            <ResultPackagesAccordion
+              resultsContainers={packerResults}
+              visData={visData}
+            />
           </PackagesFrame>
         </Stack>
       )}

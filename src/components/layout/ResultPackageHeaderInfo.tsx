@@ -25,7 +25,7 @@ const renderDimensions = (container: ResultContainer): string => {
     container.dimensions.depth +
     " x " +
     container.dimensions.height +
-    " mm"
+    ""
   ); // TODO - Handle unit type
 };
 
