@@ -2,17 +2,27 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import { VisContainer } from "../../commons/types";
 import { Results3DVisualization } from "../elements/Results3DVisualization";
+import styled from "styled-components";
+import { themeColors } from "../../commons/colors";
 
 type PackageResults3DViewProps = {
-  visData: Array<VisContainer>;
+  visContainerData: VisContainer;
 };
 
+const VisualizationContainer = styled<any>(Container)`
+  background: ${(props) => props.themeColors.secondaryDark};
+  height: 300px;
+`;
+
 export const PackageResults3DView = ({
-  visData,
+  visContainerData,
 }: PackageResults3DViewProps) => {
   return (
-    <Container className="rounded">
-      <Results3DVisualization visData={visData} />
-    </Container>
+    <VisualizationContainer
+      className="rounded border"
+      themeColors={themeColors}
+    >
+      <Results3DVisualization visContainerData={visContainerData} />
+    </VisualizationContainer>
   );
 };

@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { Color, Object3D } from "three";
+import * as colorConvert from "color-convert";
 
 // Modified version of @skjolber 3d-bin-container-packing visualizer
 // Source: https://github.com/skjolber/3d-bin-container-packing/tree/master/visualizer/viewer
@@ -297,3 +298,19 @@ export class StackableRenderer {
     return undefined;
   }
 }
+
+export const generateRandomColor = (): Color => {
+  const randomNumber = (min: number, max: number): number => {
+    return min + Math.random() * (max - min);
+  };
+
+  const hslColor = {
+    h: Math.round(randomNumber(1, 360)),
+    s: Math.round(randomNumber(61, 100)),
+    l: 50,
+  };
+
+  const hexColor =
+    "#" + colorConvert.hsl.hex([hslColor.h, hslColor.s, hslColor.l]);
+  return new Color(hexColor);
+};

@@ -32,7 +32,7 @@ export const ResultPackageItem = ({
               item.dimensions.width,
               item.dimensions.depth,
               item.dimensions.height,
-              "mm"
+              ""
             ) /* TODO - Handle unit */
           }
         </span>

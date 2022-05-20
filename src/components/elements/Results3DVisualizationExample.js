@@ -35,7 +35,7 @@ let renderedStepNumber = -1;
 let maxStepNumber = 0;
 let minStepNumber = 0;
 
-export class Results3DVisualization extends Component {
+export class Results3DVisualizationExample extends Component {
   constructor(props) {
     super(props);
     this.state = { useWireFrame: false };
@@ -237,6 +237,9 @@ export class Results3DVisualization extends Component {
 
     // TODO - Fix attempting to read JSON here, replace with loading from state
     load(this.props.visData);
+
+    console.log(this.props.dimensions);
+
     /*http("/assets/containers.json").then(load);
 
     setInterval(function () {
@@ -270,10 +273,13 @@ export class Results3DVisualization extends Component {
   }
 
   onWindowResize = () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = this.props.dimensions.width / this.props.dimensions.height;
     camera.updateProjectionMatrix();
 
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setSize(
+      this.props.dimensions.width,
+      this.props.dimensions.height
+    );
   };
 
   onDocumentMouseMove = (event) => {
@@ -412,7 +418,10 @@ export class Results3DVisualization extends Component {
   render() {
     return (
       <div
-        style={{ width: 500, height: 500 }}
+        style={{
+          width: 300,
+          height: 300,
+        }}
         ref={(mount) => {
           this.mount = mount;
         }}

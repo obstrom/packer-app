@@ -1,13 +1,15 @@
 import React from "react";
-import { ResultContainer } from "../../commons/types";
+import { ResultContainer, VisContainer } from "../../commons/types";
 import { Accordion } from "react-bootstrap";
 import { ResultPackageHeaderInfo } from "./ResultPackageHeaderInfo";
 import { ResultPackageItem } from "../elements/ResultPackageItem";
 import { themeColors } from "../../commons/colors";
 import styled from "styled-components";
+import { PackageResults3DView } from "./PackageResults3DView";
 
 type ResultPackagesAccordionProps = {
   resultsContainers: Array<ResultContainer>;
+  visData: Array<VisContainer>;
   className?: string;
 };
 
@@ -27,7 +29,7 @@ const renderHeaderTitle = (index: number, container: ResultContainer) => {
     container.dimensions.depth +
     " x " +
     container.dimensions.height +
-    " mm"; // TODO - Handle unit type
+    ""; // TODO - Handle unit type
   const desc = container.description;
 
   return (
@@ -41,6 +43,7 @@ const renderHeaderTitle = (index: number, container: ResultContainer) => {
 
 export const ResultPackagesAccordion = ({
   resultsContainers,
+  visData,
   className,
 }: ResultPackagesAccordionProps) => {
   return (
@@ -83,15 +86,16 @@ export const ResultPackagesAccordion = ({
           </Accordion.Header>
           <AccordionBody themeColors={themeColors}>
             <ResultPackageHeaderInfo container={container} />
-            <div className="mt-2">
+            <div className="mt-2 mb-4">
               <h5>Items overview:</h5>
               {container.items.map((item, index) => (
                 <ResultPackageItem key={index} item={item} />
               ))}
             </div>
-            {/*
-              TODO - Implement and show 3D view of package
-            */}
+            <div>
+              <h5 className="my-2">Package visualization:</h5>
+              <PackageResults3DView visContainerData={visData[index]} />
+            </div>
           </AccordionBody>
         </AccordionItem>
       ))}
