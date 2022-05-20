@@ -18,7 +18,6 @@ import {
 import { ResultPackagesAccordion } from "./ResultPackagesAccordion";
 import { calcSpaceEfficiencyPercentageFromResultsVolume } from "../../commons/displayCalculations";
 import { themeColors } from "../../commons/colors";
-import { Results3DVisualizationExample } from "../elements/Results3DVisualizationExample";
 
 type PackerResultsFrameProps = {
   className?: string;
@@ -87,7 +86,6 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
               visData={visData}
             />
           </PackagesFrame>
-          {/*<Results3DVisualizationExample visData={visData} />*/}
         </Stack>
       )}
     </Frame>
