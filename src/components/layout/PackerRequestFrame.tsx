@@ -44,7 +44,10 @@ const renderItemQuantities = (items: Array<Item>): string => {
 export const PackerRequestFrame = ({
   setViewStatus,
 }: PackerRequestFrameProps) => {
-  const { post, loading } = useFetch(process.env.REACT_APP_API_BASE_URL ?? "");
+  const { post, loading } = useFetch(
+    process.env.REACT_APP_API_BASE_URL ?? "",
+    process.env.REACT_APP_API_AUTH_KEY ?? ""
+  );
 
   const packerObjectContext = useContext(PackerObjectContext);
   const packerResponseContext = useContext(PackerResponseContext);
