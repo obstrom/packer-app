@@ -2,11 +2,6 @@
   "name": "packer-app",
   "version": "0.1.0",
   "private": true,
-  "main": "server.js",
-  "engines": {
-    "npm": "8.3.1",
-    "node": "16.14.0"
-  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
@@ -37,7 +32,6 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "heroku-postbuild": "npm install",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
