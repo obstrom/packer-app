@@ -64,6 +64,11 @@ export const PackerRequestFrame = ({
       return;
     }
 
+    console.log("DEBUG ENV: ", {
+      url: process.env.REACT_APP_API_BASE_URL,
+      key: process.env.REACT_APP_API_AUTH_KEY,
+    });
+
     // TODO - Fix lengthUnit and weightUnit - Right now API expects Global setting while front-end handles this per object
     post("/pack", createPackerRequestBody(items, bins, "mm", "g"))
       .then((data: any) => {
