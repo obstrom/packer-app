@@ -10,12 +10,12 @@ const CanvasContainer = styled.div`
 
 const Cube = () => {
   const cubeSides = useLoader(TextureLoader, [
-    "textures/cube1.bmp",
-    "textures/cube2.bmp",
-    "textures/cube3.bmp",
-    "textures/cube4.bmp",
-    "textures/cube5.bmp",
-    "textures/cube6.bmp",
+    "textures/logo/logo_texture_1.bmp",
+    "textures/logo/logo_texture_2.bmp",
+    "textures/logo/logo_texture_3.bmp",
+    "textures/logo/logo_texture_4.bmp",
+    "textures/logo/logo_texture_5.bmp",
+    "textures/logo/logo_texture_6.bmp",
   ]);
 
   const ref = useRef<THREE.Mesh>(null!);
