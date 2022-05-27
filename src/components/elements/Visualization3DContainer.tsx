@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import * as THREE from "three";
-import { BufferGeometry, Color } from "three";
+import { Color } from "three";
 
 type Visualization3DContainerProps = {
   xPos?: number;

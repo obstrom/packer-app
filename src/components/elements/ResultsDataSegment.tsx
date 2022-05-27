@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Stack from "react-bootstrap/Stack";
-import { IconProp, SizeProp } from "@fortawesome/fontawesome-svg-core";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { themeColors } from "../../commons/colors";
 

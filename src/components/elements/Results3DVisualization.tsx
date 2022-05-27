@@ -28,7 +28,7 @@ const OrbitCameraController = ({
     return () => {
       controls.dispose();
     };
-  }, [camera, gl]);
+  }, [camera, gl, target]);
   return null;
 };
 

@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { AppLogo } from "../elements/AppLogo";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
 import { AddObjectContainer } from "./AddObjectFormFrame";

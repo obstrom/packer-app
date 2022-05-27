@@ -1,9 +1,5 @@
 import React, { useContext } from "react";
 import { PackerJobResponseStatus } from "../../commons/enums";
-import Alert from "react-bootstrap/Alert";
-import Stack from "react-bootstrap/Stack";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWarning } from "@fortawesome/free-solid-svg-icons";
 import Badge from "react-bootstrap/Badge";
 import { PackerResponseContext } from "../../contexts/PackerResponseContext";
 

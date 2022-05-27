@@ -1,5 +1,5 @@
 import React from "react";
-import { Item, ResultContainer, ResultItem } from "../../commons/types";
+import { ResultItem } from "../../commons/types";
 import styled from "styled-components";
 import Stack from "react-bootstrap/Stack";
 import { QuantityBadge } from "./QuantityBadge";

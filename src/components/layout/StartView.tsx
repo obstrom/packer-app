@@ -1,7 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
 import Container from "react-bootstrap/Container";
-import { AppLogo } from "../elements/AppLogo";
-import Button from "react-bootstrap/Button";
 import { AppViewStatus } from "../../commons/enums";
 import styled from "styled-components";
 import { themeColors } from "../../commons/colors";
