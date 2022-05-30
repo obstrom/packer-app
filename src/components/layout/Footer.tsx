@@ -39,14 +39,17 @@ export const Footer = ({ className }: FooterProps) => {
           >
             Oscar Bergström
           </CreditLink>
-          <span>{". Last updated 05-2022"}</span>
+          <span>{"."}</span>
         </CreditText>
         <CreditTextSmall className="text-center">
-          <span>
-            {
-              "Built with React.js, Typescript, Bootstrap-React and Three.js (react-three-fiber). "
-            }
-          </span>
+          <span>{"See source and read more at "}</span>
+          <CreditLink
+            href="https://github.com/obstrom/packer-app"
+            themeColors={themeColors}
+          >
+            Github
+          </CreditLink>
+          <span>{" . "}</span>
           <span>{"Queries a "}</span>
           <br />
           <CreditLink
@@ -58,19 +61,6 @@ export const Footer = ({ className }: FooterProps) => {
           <span>
             {" created for this project for all packing calculations."}
           </span>
-          <br />
-          <span>
-            {
-              "The API relies upon and extends the open-source bin packing package "
-            }
-          </span>
-          <CreditLink
-            href="https://github.com/skjolber/3d-bin-container-packing"
-            themeColors={themeColors}
-          >
-            3d-bin-container-packing
-          </CreditLink>
-          <span>{"."}</span>
         </CreditTextSmall>
       </div>
     </Container>
