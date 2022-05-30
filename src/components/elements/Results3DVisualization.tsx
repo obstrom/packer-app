@@ -25,6 +25,7 @@ const OrbitCameraController = ({
     controls.minDistance = 1;
     controls.maxDistance = 6;
     controls.target = target;
+    controls.update();
     return () => {
       controls.dispose();
     };
@@ -57,7 +58,7 @@ export const Results3DVisualization = ({
   return (
     <Canvas>
       <OrbitCameraController
-        target={new Vector3(width / 2, depth / 2, height / 2)}
+        target={new Vector3(width / 2, height / 2, depth / 2)}
       />
       <Suspense fallback={null}>
         <ambientLight intensity={0.65} />
