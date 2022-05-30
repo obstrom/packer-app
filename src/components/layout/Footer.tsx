@@ -42,25 +42,14 @@ export const Footer = ({ className }: FooterProps) => {
           <span>{"."}</span>
         </CreditText>
         <CreditTextSmall className="text-center">
-          <span>{"See source and read more at "}</span>
+          <span>{"Read more about this project and view source at "}</span>
           <CreditLink
             href="https://github.com/obstrom/packer-app"
             themeColors={themeColors}
           >
             Github
           </CreditLink>
-          <span>{" . "}</span>
-          <span>{"Queries a "}</span>
-          <br />
-          <CreditLink
-            href="https://github.com/obstrom/packer-app-api"
-            themeColors={themeColors}
-          >
-            Java Spring Boot API
-          </CreditLink>
-          <span>
-            {" created for this project for all packing calculations."}
-          </span>
+          <span>{"."}</span>
         </CreditTextSmall>
       </div>
     </Container>
