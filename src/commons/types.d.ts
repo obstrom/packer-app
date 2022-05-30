@@ -1,4 +1,4 @@
-import { LengthUnits, WeightUnits } from "./enums";
+import {LengthUnits, VolumeUnits, WeightUnits} from "./enums";
 
 interface PackerObject {
   uuid: string;
@@ -31,6 +31,8 @@ abstract interface PackerBaseRequestObject {
   depth: number;
   height: number;
   weight: number;
+  lengthUnitType: LengthUnits;
+  weightUnitType: WeightUnits;
 }
 
 interface PackerItemRequest extends PackerBaseRequestObject {
@@ -43,16 +45,16 @@ interface PackerContainerRequest extends PackerBaseRequestObject {
 }
 
 interface PackerJobRequest {
-  lengthUnitType: LengthUnits;
-  weightUnitType: WeightUnits;
   boxes: Array<PackerContainerRequest>;
   products: Array<PackerItemRequest>;
+  visualizer: boolean;
 }
 
 interface ResultsVolume {
   totalJobVolume: number;
   totalJobVolumeRemaining: number;
   totalJobVolumeUsed: number;
+  unit: VolumeUnits;
 }
 
 interface ResultContainer {
@@ -64,6 +66,7 @@ interface ResultContainer {
   content: ResultContainerContent;
   dimensions: ResultObjectDimensions;
   items: Array<ResultItem>;
+  weightUnit: WeightUnits;
 }
 
 interface ResultContainerContent {
@@ -77,7 +80,7 @@ interface ResultObjectDimensions {
   width: number;
   depth: number;
   height: number;
-  // TODO - Add and handle length unit type ?
+  unit: LengthUnits;
 }
 
 interface ResultItem {

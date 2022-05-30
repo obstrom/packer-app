@@ -9,24 +9,14 @@ import {
   faWeightHanging,
 } from "@fortawesome/free-solid-svg-icons";
 import {
-  formatDecimalNumberToStringPercentage,
-  roundDecimalNumber,
+    formatDecimalNumberToStringPercentage, renderDimensions,
+    roundDecimalNumber,
 } from "../../commons/displayCalculations";
+import {lengthUnitToString} from "../../commons/enums";
 
 type ResultPackageHeaderInfoProps = {
   container: ResultContainer;
   className?: string;
-};
-
-const renderDimensions = (container: ResultContainer): string => {
-  return (
-    container.dimensions.width +
-    " x " +
-    container.dimensions.depth +
-    " x " +
-    container.dimensions.height +
-    ""
-  ); // TODO - Handle unit type
 };
 
 const renderWeight = (container: ResultContainer): string => {
@@ -50,7 +40,12 @@ export const ResultPackageHeaderInfo = ({
       />
       <ResultsDataSegment
         label="Dimensions"
-        value={renderDimensions(container)}
+        value={renderDimensions(
+            container.dimensions.width,
+            container.dimensions.depth,
+            container.dimensions.height,
+            container.dimensions.unit
+        )}
         icon={faArrowsLeftRightToLine}
         size="sm"
       />

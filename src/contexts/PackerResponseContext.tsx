@@ -1,11 +1,6 @@
-import React, {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useState,
-} from "react";
-import { ResultContainer, VisContainer, ResultsVolume } from "../commons/types";
-import { PackerJobResponseStatus } from "../commons/enums";
+import React, {createContext, Dispatch, SetStateAction, useState,} from "react";
+import {ResultContainer, ResultsVolume, VisContainer} from "../commons/types";
+import {PackerJobResponseStatus, WeightUnits} from "../commons/enums";
 
 export interface PackerResponseContextValue {
   results: Array<ResultContainer>;
@@ -22,6 +17,7 @@ export interface ResultsInfo {
   resultsVolume: ResultsVolume | null;
   packingTime: number;
   totalWeight: number;
+  weightUnit: WeightUnits;
 }
 
 const PackerResponseContext = createContext<PackerResponseContextValue | null>(
@@ -41,6 +37,7 @@ const PackerResponseProvider = (props: any) => {
     resultsVolume: null,
     packingTime: 0,
     totalWeight: 0,
+    weightUnit: WeightUnits.METRIC_GRAM,
   });
 
   const value: PackerResponseContextValue = {

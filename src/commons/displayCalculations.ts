@@ -1,5 +1,5 @@
 import { PackerObject, ResultsVolume } from "./types";
-import { lengthUnitToString } from "./enums";
+import {LengthUnits, lengthUnitToString} from "./enums";
 
 export const roundDecimalNumber = (n: number): number => {
   return Math.round((n + Number.EPSILON) * 100) / 100;
@@ -37,9 +37,9 @@ export const renderDimensions = (
   width: number,
   depth: number,
   height: number,
-  unit?: string
+  unit: LengthUnits
 ) => {
-  return `${width} x ${depth} x ${height} ${unit ? unit : ""}`;
+  return `${width} x ${depth} x ${height} ${lengthUnitToString(unit)}`;
 };
 
 export const renderPackerObjectDimensions = (o: PackerObject) => {
@@ -47,6 +47,6 @@ export const renderPackerObjectDimensions = (o: PackerObject) => {
     o.width,
     o.depth,
     o.height,
-    lengthUnitToString(o.lengthUnit)
+    o.lengthUnit
   );
 };

@@ -1,16 +1,5 @@
-import {
-  Bin,
-  Item,
-  PackerContainerRequest,
-  PackerItemRequest,
-  PackerJobRequest,
-} from "./types";
-import {
-  LengthUnits,
-  stringToLengthUnit,
-  stringToWeightUnit,
-  WeightUnits,
-} from "./enums";
+import {Bin, Item, PackerContainerRequest, PackerItemRequest, PackerJobRequest,} from "./types";
+import {LengthUnits, WeightUnits,} from "./enums";
 
 export const convertItemsToPackerItemRequests = (
   items: Array<Item>
@@ -24,6 +13,8 @@ export const convertItemsToPackerItemRequests = (
     height: item.height,
     weight: item.weight,
     quantity: item.quantity,
+    lengthUnitType: item.lengthUnit,
+    weightUnitType: item.weightUnit,
   }));
 };
 
@@ -38,20 +29,19 @@ export const convertBinsToPackerContainerRequests = (
     height: bin.height,
     weight: bin.weight,
     maxLoad: bin.maxWeight,
+    lengthUnitType: bin.lengthUnit,
+    weightUnitType: bin.weightUnit,
   }));
 };
 
 export const createPackerRequestBody = (
   items: Array<Item>,
   bins: Array<Bin>,
-  lengthUnit: string,
-  weightUnit: string
+  visualizer: boolean
 ): PackerJobRequest => {
   return {
-    lengthUnitType:
-      stringToLengthUnit(lengthUnit) ?? LengthUnits.METRIC_MILLIMETER,
-    weightUnitType: stringToWeightUnit(weightUnit) ?? WeightUnits.METRIC_GRAM,
     boxes: convertBinsToPackerContainerRequests(bins),
     products: convertItemsToPackerItemRequests(items),
+    visualizer: visualizer
   };
 };

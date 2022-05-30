@@ -6,6 +6,8 @@ import { ResultPackageItem } from "../elements/ResultPackageItem";
 import { themeColors } from "../../commons/colors";
 import styled from "styled-components";
 import { PackageResults3DView } from "./PackageResults3DView";
+import {lengthUnitToString} from "../../commons/enums";
+import {renderDimensions} from "../../commons/displayCalculations";
 
 type ResultPackagesAccordionProps = {
   resultsContainers: Array<ResultContainer>;
@@ -22,15 +24,14 @@ const AccordionItem = styled<any>(Accordion.Item)`
 `;
 
 const renderHeaderTitle = (index: number, container: ResultContainer) => {
-  const n = index + 1;
-  const dimensions =
-    container.dimensions.width +
-    " x " +
-    container.dimensions.depth +
-    " x " +
-    container.dimensions.height +
-    ""; // TODO - Handle unit type
-  const desc = container.description;
+  const n: number = index + 1;
+  const dimensions: string = renderDimensions(
+      container.dimensions.width,
+      container.dimensions.depth,
+      container.dimensions.height,
+      container.dimensions.unit
+  );
+  const desc: string = container.description;
 
   return (
     <span>

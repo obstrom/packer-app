@@ -4,9 +4,10 @@ import styled from "styled-components";
 import Stack from "react-bootstrap/Stack";
 import { QuantityBadge } from "./QuantityBadge";
 import { renderDimensions } from "../../commons/displayCalculations";
+import { lengthUnitToString } from "../../commons/enums";
 
 type ResultPackageItemProps = {
-  item: ResultItem; // TODO - This needs to be updated
+  item: ResultItem;
   className?: string;
 };
 
@@ -32,8 +33,8 @@ export const ResultPackageItem = ({
               item.dimensions.width,
               item.dimensions.depth,
               item.dimensions.height,
-              ""
-            ) /* TODO - Handle unit */
+              item.dimensions.unit
+            )
           }
         </span>
         <span className="px-2 text-truncate d-inline-block">

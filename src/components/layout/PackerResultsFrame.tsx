@@ -1,23 +1,14 @@
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import styled from "styled-components";
 import Stack from "react-bootstrap/Stack";
-import {
-  ResultContainer,
-  ResultsVolume,
-  VisContainer,
-} from "../../commons/types";
-import { PackerResponseContext } from "../../contexts/PackerResponseContext";
-import { PackerJobResponseStatus } from "../../commons/enums";
-import { ResultsDataSegment } from "../elements/ResultsDataSegment";
-import {
-  faBox,
-  faClipboardCheck,
-  faStopwatch,
-  faWeightHanging,
-} from "@fortawesome/free-solid-svg-icons";
-import { ResultPackagesAccordion } from "./ResultPackagesAccordion";
-import { calcSpaceEfficiencyPercentageFromResultsVolume } from "../../commons/displayCalculations";
-import { themeColors } from "../../commons/colors";
+import {ResultContainer, ResultsVolume, VisContainer,} from "../../commons/types";
+import {PackerResponseContext} from "../../contexts/PackerResponseContext";
+import {PackerJobResponseStatus, WeightUnits, weightUnitToString} from "../../commons/enums";
+import {ResultsDataSegment} from "../elements/ResultsDataSegment";
+import {faBox, faClipboardCheck, faStopwatch, faWeightHanging,} from "@fortawesome/free-solid-svg-icons";
+import {ResultPackagesAccordion} from "./ResultPackagesAccordion";
+import {calcSpaceEfficiencyPercentageFromResultsVolume} from "../../commons/displayCalculations";
+import {themeColors} from "../../commons/colors";
 
 type PackerResultsFrameProps = {
   className?: string;
@@ -31,8 +22,12 @@ const PackagesFrame = styled<any>(Stack)`
   background: #fff;
 `;
 
-const renderWeight = (weight: number) => {
-  return weight > 999 ? `${weight / 1000} kg` : `${weight} g`;
+const renderWeight = (weight: number, unit: WeightUnits) => {
+  if (unit === WeightUnits.METRIC_GRAM) {
+    return weight > 999 ? `${weight / 1000} kg` : `${weight} g`;
+  } else {
+    return weight + " kg";
+  }
 };
 
 export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
@@ -46,6 +41,7 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
   const volume: ResultsVolume | undefined =
     packerResponseContext?.info?.resultsVolume ?? undefined;
   const totalWeight: number = packerResponseContext?.info?.totalWeight ?? 0;
+  const weightUnit: WeightUnits = packerResponseContext?.info?.weightUnit ?? WeightUnits.METRIC_GRAM;
   const packingTime: number = packerResponseContext?.info?.packingTime ?? 0;
 
   return (
@@ -62,7 +58,7 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
             />
             <ResultsDataSegment
               label="Total weight"
-              value={renderWeight(totalWeight)}
+              value={renderWeight(totalWeight, weightUnit)}
               icon={faWeightHanging}
               size="lg"
             />

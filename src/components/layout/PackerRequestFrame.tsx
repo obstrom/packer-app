@@ -63,8 +63,7 @@ export const PackerRequestFrame = ({
       return;
     }
 
-    // TODO - Fix lengthUnit and weightUnit - Right now API expects Global setting while front-end handles this per object
-    post("/pack", createPackerRequestBody(items, bins, "mm", "g"))
+    post("/pack", createPackerRequestBody(items, bins, true))
       .then((data: any) => {
         console.log("Response data: ", data);
 
@@ -76,6 +75,7 @@ export const PackerRequestFrame = ({
             resultsVolume: data.volume,
             packingTime: data.packingTimeMs,
             totalWeight: data.totalWeight,
+            weightUnit: data.weightUnit
           });
 
           if (data.boxes.length === 0) {
@@ -85,7 +85,14 @@ export const PackerRequestFrame = ({
 
           packerResponseContext?.setStatus(PackerJobResponseStatus.SUCCESS);
           setViewStatus(AppViewStatus.RESULTS);
+
+          console.log("packerResponseContext: ", {
+            results: packerResponseContext?.results,
+            info: packerResponseContext?.info,
+            status: packerResponseContext?.status
+          });
         } catch (e: any) {
+          console.warn("Failed to map API response");
           if (data.message.includes("timeout")) {
             packerResponseContext?.setStatus(PackerJobResponseStatus.TIMEOUT);
             return;

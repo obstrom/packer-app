@@ -56,6 +56,13 @@ export const weightUnitToString = (weightUnit: WeightUnits) => {
   }
 };
 
+export const enum VolumeUnits {
+  METRIC_CUBIC_MILLIMETER = "METRIC_CUBIC_MILLIMETER",
+  METRIC_CUBIC_CENTIMETER = "METRIC_CUBIC_CENTIMETER",
+  METRIC_CUBIC_DECIMETER = "METRIC_CUBIC_DECIMETER",
+  METRIC_CUBIC_METER = "METRIC_CUBIC_METER",
+}
+
 export const enum PackerObjectTypes {
   BIN = "bin",
   ITEM = "item",
