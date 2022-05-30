@@ -7,6 +7,8 @@ import {
 } from "../../commons/packerObjectForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsLeftRightToLine } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+import Form from "react-bootstrap/Form";
 
 type DimensionsFormSectionProps = {
   formData: PackerObjectFormData;
@@ -23,7 +25,7 @@ export const DimensionsFormSection = ({
 }: DimensionsFormSectionProps) => {
   return (
     <>
-      <h4>
+      <h4 className="fs-5">
         <FontAwesomeIcon
           size="sm"
           icon={faArrowsLeftRightToLine}

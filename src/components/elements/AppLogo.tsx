@@ -11,8 +11,8 @@ type AppLogoProps = {
 
 const Title = styled.h1<any>`
   color: #3b3b3b;
-  font-size: 4rem;
-  text-shadow: 0 0 0.2rem rgb(0 0 0 / 40%);
+  font-size: 3.2rem;
+  text-shadow: 0 0 0.3rem rgb(0 0 0 / 40%);
 `;
 
 const ClickableFrame = styled.div`

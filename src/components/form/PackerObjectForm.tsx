@@ -44,7 +44,7 @@ export const PackerObjectForm = ({
   return (
     <Form onSubmit={handleOnSubmit}>
       <Col className="mb-4">
-        <h4>
+        <h4 className="fs-5">
           <FontAwesomeIcon size="sm" icon={faCircleInfo} className={"me-2"} />
           General
         </h4>

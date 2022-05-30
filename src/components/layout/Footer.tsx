@@ -9,12 +9,12 @@ type FooterProps = {
 
 const CreditText = styled.p`
   color: #363636;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
 `;
 
 const CreditTextSmall = styled.p`
   color: #363636;
-  font-size: 0.8rem;
+  font-size: 0.65rem;
 `;
 
 const CreditLink = styled.a<any>`

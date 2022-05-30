@@ -5,7 +5,8 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 import styled from "styled-components";
 
 const CanvasContainer = styled.div`
-  width: 10rem;
+  width: 6.5rem;
+  height: 6.5rem;
 `;
 
 const Cube = () => {
@@ -35,12 +36,13 @@ const Cube = () => {
 
   return (
     <mesh
-      position={[0, 0, 0]}
+      position={[0, 0.33, 0]}
       ref={ref}
+      scale={2.75}
       onPointerOver={() => setHover(true)}
       onPointerOut={() => setHover(false)}
     >
-      <boxGeometry args={[2.5, 2.5, 2.5]} />
+      <boxGeometry args={[1, 1, 1]} />
       {cubeSides.map((texture, id) => (
         <meshStandardMaterial
           key={texture.id}

@@ -24,7 +24,7 @@ function App() {
   return (
     <PackerObjectProvider>
       <PackerResponseProvider>
-        <AppContainer className="pb-5" themeColors={themeColors}>
+        <AppContainer className="pb-5 mt-2" themeColors={themeColors}>
           <AppLogo setViewStatus={setViewStatus} />
           {viewStatus === AppViewStatus.START && (
             <StartView setViewStatus={setViewStatus} />

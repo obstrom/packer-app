@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import { FormSelectOption } from "../../commons/types";
+import styled from "styled-components";
 
 type FormSelectProps = {
   controlId: string;
@@ -10,6 +11,10 @@ type FormSelectProps = {
   onChange?: (e: any) => void;
   value?: string;
 };
+
+const LabelText = styled(Form.Label)`
+  font-size: 0.9rem;
+`;
 
 export const FormSelect = ({
   controlId,
@@ -21,8 +26,8 @@ export const FormSelect = ({
 }: FormSelectProps) => {
   return (
     <Form.Group controlId={controlId} className={className}>
-      <Form.Label>{label}</Form.Label>
-      <Form.Select onChange={onChange} value={value}>
+      <LabelText className="mb-1">{label}</LabelText>
+      <Form.Select size="sm" onChange={onChange} value={value}>
         {options.map((value, index) => (
           <option key={index} value={value.value}>
             {value.text}

@@ -17,6 +17,10 @@ type SetupViewProps = {
   className?: string;
 };
 
+const Frame = styled(Container)`
+  max-width: 1000px;
+`;
+
 const ViewNavigationButton = styled.div`
   cursor: pointer;
 `;
@@ -26,46 +30,44 @@ export const SetupView = ({ setViewStatus, className }: SetupViewProps) => {
   const packerResults: Array<ResultContainer> = packerResponseContext?.results ?? [];
 
   return (
-    <>
-      <Container fluid="sm">
-        <Stack direction="horizontal" className="justify-content-between">
-          <ViewNavigationButton
-            className="d-flex align-items-center fs-2 fw-normal p-2"
-            onClick={() => setViewStatus(AppViewStatus.START)}
-          >
-            <FontAwesomeIcon icon={faChevronLeft} className="fs-3" />
-            <span className="ms-2">Intro</span>
-          </ViewNavigationButton>
-          {packerResults.length > 0 && <ViewNavigationButton
-              className="d-flex align-items-center fs-2 fw-normal p-2 me-2"
-              onClick={() => setViewStatus(AppViewStatus.RESULTS)}
-          >
-            <span>Results</span>
-            <FontAwesomeIcon icon={faChevronRight} className="fs-3 ms-2" />
-          </ViewNavigationButton>}
-        </Stack>
-        <Row>
-          <Col className="mb-4">
-            <Row>
-              <AddObjectContainer className="mb-2 p-4 border rounded" />
-            </Row>
-            <Row>
-              <PackerRequestFrame setViewStatus={setViewStatus} />
-            </Row>
-          </Col>
-          <Col>
-            <ListPackerObjectFrame
-              className="mb-2"
-              headerTitle="Containers"
-              packerObjectType={PackerObjectTypes.BIN}
-            />
-            <ListPackerObjectFrame
-              headerTitle="Items"
-              packerObjectType={PackerObjectTypes.ITEM}
-            />
-          </Col>
-        </Row>
-      </Container>
-    </>
+    <Frame fluid="sm">
+      <Stack direction="horizontal" className="justify-content-between">
+        <ViewNavigationButton
+          className="d-flex align-items-center fs-4 fw-normal p-1"
+          onClick={() => setViewStatus(AppViewStatus.START)}
+        >
+          <FontAwesomeIcon icon={faChevronLeft} className="fs-5" />
+          <span className="ms-2">Intro</span>
+        </ViewNavigationButton>
+        {packerResults.length > 0 && <ViewNavigationButton
+            className="d-flex align-items-center fs-4 fw-normal p-1 me-2"
+            onClick={() => setViewStatus(AppViewStatus.RESULTS)}
+        >
+          <span>Results</span>
+          <FontAwesomeIcon icon={faChevronRight} className="fs-5 ms-2" />
+        </ViewNavigationButton>}
+      </Stack>
+      <Row>
+        <Col className="mb-4">
+          <Row>
+            <AddObjectContainer className="mb-2 p-4 border rounded" />
+          </Row>
+          <Row>
+            <PackerRequestFrame setViewStatus={setViewStatus} />
+          </Row>
+        </Col>
+        <Col>
+          <ListPackerObjectFrame
+            className="mb-2"
+            headerTitle="Containers"
+            packerObjectType={PackerObjectTypes.BIN}
+          />
+          <ListPackerObjectFrame
+            headerTitle="Items"
+            packerObjectType={PackerObjectTypes.ITEM}
+          />
+        </Col>
+      </Row>
+    </Frame>
   );
 };

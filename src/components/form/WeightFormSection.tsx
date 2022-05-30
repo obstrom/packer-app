@@ -26,7 +26,7 @@ export const WeightFormSection = ({
 }: WeightFormSectionProps) => {
   return (
     <>
-      <h4>
+      <h4 className="fs-5">
         <FontAwesomeIcon size="sm" icon={faWeightHanging} className={"me-2"} />
         Weights
       </h4>

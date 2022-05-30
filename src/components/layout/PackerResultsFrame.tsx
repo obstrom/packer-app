@@ -46,10 +46,10 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
 
   return (
     <Frame className={className} themeColors={themeColors}>
-      <h3 className="fs-2">Packing results</h3>
+      <h3 className="fs-4">Packing results</h3>
       {status === PackerJobResponseStatus.SUCCESS && (
         <Stack>
-          <Stack direction="horizontal" gap={4} className="mt-3">
+          <Stack direction="horizontal" gap={3} className="mt-2">
             <ResultsDataSegment
               label="Packages"
               value={packerResults.length.toString()}
@@ -75,7 +75,7 @@ export const PackerResultsFrame = ({ className }: PackerResultsFrameProps) => {
               size="lg"
             />
           </Stack>
-          <h4 className="my-2">Packages</h4>
+          <h4 className="my-2 fs-5">Packages</h4>
           <PackagesFrame className="rounded" themeColors={themeColors}>
             <ResultPackagesAccordion
               resultsContainers={packerResults}

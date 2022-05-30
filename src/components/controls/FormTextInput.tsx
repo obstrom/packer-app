@@ -1,5 +1,6 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
+import styled from "styled-components";
 
 type FormTextInputProps = {
   value: string;
@@ -8,6 +9,10 @@ type FormTextInputProps = {
   className?: string;
   onChange?: (e: any) => void;
 };
+
+const LabelText = styled(Form.Label)`
+  font-size: 0.9rem;
+`;
 
 export const FormTextInput = ({
   value,
@@ -18,9 +23,9 @@ export const FormTextInput = ({
 }: FormTextInputProps) => {
   return (
     <Form.Group controlId={controlId} className={className}>
-      <Form.Label>{label}</Form.Label>
+      <LabelText className="mb-1">{label}</LabelText>
       <Form.Group className="input-group">
-        <Form.Control type="text" value={value} onChange={onChange} />
+        <Form.Control size="sm" type="text" value={value} onChange={onChange} />
       </Form.Group>
     </Form.Group>
   );

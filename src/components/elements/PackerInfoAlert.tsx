@@ -5,10 +5,15 @@ import Stack from "react-bootstrap/Stack";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWarning } from "@fortawesome/free-solid-svg-icons";
 import { PackerResponseContext } from "../../contexts/PackerResponseContext";
+import styled from "styled-components";
 
 type PackerInfoAlertProps = {
   className?: string;
 };
+
+const AlertText = styled.span`
+  font-size: 0.9rem;
+`;
 
 export const PackerInfoAlert = ({ className }: PackerInfoAlertProps) => {
   const packerResponseContext = useContext(PackerResponseContext);
@@ -38,7 +43,7 @@ export const PackerInfoAlert = ({ className }: PackerInfoAlertProps) => {
     <Alert variant={variant} className={className}>
       <Stack direction="horizontal" gap={3}>
         <FontAwesomeIcon size="2x" style={{ opacity: 0.75 }} icon={faWarning} />
-        <span>{text}</span>
+        <AlertText>{text}</AlertText>
       </Stack>
     </Alert>
   );

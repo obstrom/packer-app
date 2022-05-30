@@ -23,6 +23,10 @@ const BadgeContainer = styled(Stack)`
   color: #fff;
 `;
 
+const DimensionsText = styled.span`
+  font-size: 0.9rem;
+`;
+
 export const PackerObjectListItem = ({
   object,
   type,
@@ -42,11 +46,11 @@ export const PackerObjectListItem = ({
     >
       <div className="d-flex">
         {type === "item" && (
-          <QuantityBadge quantity={(object as Item).quantity} />
+          <QuantityBadge quantity={(object as Item).quantity} className="ms-1" />
         )}
-        <span className="flex-grow-1 px-2 border-end">
+        <DimensionsText className="flex-grow-1 px-2 border-end">
           {renderPackerObjectDimensions(object)}
-        </span>
+        </DimensionsText>
         <span className="px-2 text-truncate d-inline-block">
           <em>{object.description}</em>
         </span>

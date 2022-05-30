@@ -74,7 +74,7 @@ export const AddObjectContainer = ({ className }: AddObjectContainerProps) => {
 
   return (
     <Frame className={className} themeColors={themeColors}>
-      <h3>Add packing object</h3>
+      <h3 className="fs-4">Add packing object</h3>
       <style type="text/css">
         {`
             .btn-brand {
@@ -92,10 +92,9 @@ export const AddObjectContainer = ({ className }: AddObjectContainerProps) => {
             }
         `}
       </style>
-      <ButtonGroup className="mt-2 mb-4">
+      <ButtonGroup className="mt-2 mb-3">
         <Button
           type="button"
-          size="lg"
           disabled={formType === PackerObjectTypes.BIN}
           onClick={() => setFormType(PackerObjectTypes.BIN)}
           variant={formType === PackerObjectTypes.BIN ? "brand" : "unselected"}
@@ -106,7 +105,6 @@ export const AddObjectContainer = ({ className }: AddObjectContainerProps) => {
         </Button>
         <Button
           type="button"
-          size="lg"
           disabled={formType === PackerObjectTypes.ITEM}
           onClick={() => setFormType(PackerObjectTypes.ITEM)}
           variant={formType === PackerObjectTypes.ITEM ? "brand" : "unselected"}

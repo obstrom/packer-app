@@ -30,8 +30,8 @@ export const LargeButton = ({
             }
         
             .btn-xxl {
-              padding: 1rem 1.5rem;
-              font-size: 1.5rem;
+              padding: 0.75rem 1rem;
+              font-size: 1.2rem;
             }
         `}
       </style>

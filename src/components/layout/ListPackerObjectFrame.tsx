@@ -64,6 +64,8 @@ export const ListPackerObjectFrame = ({
               .accordion-button {
                 background-color: ${themeColors.secondary};
                 color: ${themeColors.textMd};
+                padding: 12px 16px;
+                font-size: 1rem;
               }
               
               .accordion-button:hover {
@@ -87,7 +89,7 @@ export const ListPackerObjectFrame = ({
             `}
             </style>
             <Accordion.Header>{headerTitleAmount}</Accordion.Header>
-            <ScrollableAccordionBody themeColors={themeColors}>
+            <ScrollableAccordionBody className="p-2" themeColors={themeColors}>
               {typedPackerObjectContext?.get.map((object, index) => (
                 <PackerObjectListItem
                   key={index}

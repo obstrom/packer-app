@@ -30,6 +30,10 @@ const Frame = styled<any>(Stack)`
   background: ${(props) => props.themeColors.secondary};
 `;
 
+const AlertText = styled.span`
+  font-size: 0.9rem;
+`;
+
 const calcHasObjects = (items: Array<Item>, bins: Array<Bin>): boolean =>
   items.length > 0 && bins.length > 0;
 
@@ -115,7 +119,7 @@ export const PackerRequestFrame = ({
             style={{ opacity: 0.75 }}
             icon={hasObjects ? faCircleInfo : faTriangleExclamation}
           />
-          <span>
+          <AlertText>
             {hasObjects
               ? `Will attempt to find optimal packing for ${renderItemQuantities(
                   items
@@ -125,7 +129,7 @@ export const PackerRequestFrame = ({
                     : `any combination of ${bins.length} different containers`
                 }.`
               : "Requires at least one container and one item to pack!"}
-          </span>
+          </AlertText>
         </Stack>
       </Alert>
       <PackerInfoAlert className="mb-2" />

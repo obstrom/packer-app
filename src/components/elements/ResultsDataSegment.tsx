@@ -39,11 +39,11 @@ export const ResultsDataSegment = ({
         {icon && (
           <Icon
             icon={icon}
-            className={size === "lg" ? "me-3" : "me-2"}
-            size={size === "lg" ? "2x" : "lg"}
+            className="me-2"
+            size={size === "lg" ? "lg" : "1x"}
           />
         )}
-        <span className={size === "lg" ? "fs-2" : "fs-4"}>{value}</span>
+        <span className={size === "lg" ? "fs-4" : "fs-5"}>{value}</span>
       </Frame>
       <span
         className={`text-center ${size === "lg" ? "my-2 fs-5" : "my-1 fs-6"}`}

@@ -28,7 +28,7 @@ export const UnitsFormSection = ({
 }: UnitsFormSectionProps) => {
   return (
     <>
-      <h4>
+      <h4 className="fs-5">
         <FontAwesomeIcon size="sm" icon={faRuler} className={"me-2"} />
         Units
       </h4>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import styled from "styled-components";
 
 type FormUnitNumberInputProps = {
   value: string;
@@ -13,6 +15,10 @@ type FormUnitNumberInputProps = {
   allowZero?: boolean;
   maxValue?: number;
 };
+
+const LabelText = styled(Form.Label)`
+  font-size: 0.9rem;
+`;
 
 export const FormUnitNumberInput = ({
   unitText,
@@ -52,8 +58,8 @@ export const FormUnitNumberInput = ({
 
   return (
     <Form.Group controlId={controlId} className={className}>
-      <Form.Label className="mb-1">{label}</Form.Label>
-      <Form.Group className="input-group">
+      <LabelText className="mb-1">{label}</LabelText>
+      <InputGroup size="sm">
         <Form.Control
           type="text"
           inputMode="numeric"
@@ -65,8 +71,8 @@ export const FormUnitNumberInput = ({
           isInvalid={isInvalid}
           onChange={(e) => setValue(handleOnChange(e))}
         />
-        {unitText && <span className="input-group-text">{unitText}</span>}
-      </Form.Group>
+        {unitText && <InputGroup.Text>{unitText}</InputGroup.Text>}
+      </InputGroup>
     </Form.Group>
   );
 };
