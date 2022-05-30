@@ -153,3 +153,10 @@ export const DEFAULT_FORM_ERROR: PackerObjectFormError = {
   weightUnit: false,
   quantity: false,
 };
+
+export const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "auto"
+  });
+}

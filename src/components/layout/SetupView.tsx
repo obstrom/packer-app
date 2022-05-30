@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, {Dispatch, SetStateAction, useContext} from "react";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
 import { AddObjectContainer } from "./AddObjectFormFrame";
@@ -7,28 +7,43 @@ import { AppViewStatus, PackerObjectTypes } from "../../commons/enums";
 import { PackerRequestFrame } from "./PackerRequestFrame";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import Stack from "react-bootstrap/Stack";
+import {PackerResponseContext} from "../../contexts/PackerResponseContext";
+import {ResultContainer} from "../../commons/types";
 
 type SetupViewProps = {
   setViewStatus: Dispatch<SetStateAction<AppViewStatus>>;
   className?: string;
 };
 
-const BackButton = styled.div`
+const ViewNavigationButton = styled.div`
   cursor: pointer;
 `;
 
 export const SetupView = ({ setViewStatus, className }: SetupViewProps) => {
+  const packerResponseContext = useContext(PackerResponseContext);
+  const packerResults: Array<ResultContainer> = packerResponseContext?.results ?? [];
+
   return (
     <>
       <Container fluid="sm">
-        <BackButton
-          className="d-flex align-items-center fs-2 fw-normal p-2"
-          onClick={() => setViewStatus(AppViewStatus.START)}
-        >
-          <FontAwesomeIcon icon={faChevronLeft} className="fs-3" />
-          <span className="ms-2">Intro</span>
-        </BackButton>
+        <Stack direction="horizontal" className="justify-content-between">
+          <ViewNavigationButton
+            className="d-flex align-items-center fs-2 fw-normal p-2"
+            onClick={() => setViewStatus(AppViewStatus.START)}
+          >
+            <FontAwesomeIcon icon={faChevronLeft} className="fs-3" />
+            <span className="ms-2">Intro</span>
+          </ViewNavigationButton>
+          {packerResults.length > 0 && <ViewNavigationButton
+              className="d-flex align-items-center fs-2 fw-normal p-2 me-2"
+              onClick={() => setViewStatus(AppViewStatus.RESULTS)}
+          >
+            <span>Results</span>
+            <FontAwesomeIcon icon={faChevronRight} className="fs-3 ms-2" />
+          </ViewNavigationButton>}
+        </Stack>
         <Row>
           <Col className="mb-4">
             <Row>

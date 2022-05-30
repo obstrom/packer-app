@@ -20,6 +20,7 @@ import { PackerInfoAlert } from "../elements/PackerInfoAlert";
 import { PackerRestartButton } from "../controls/PackerRestartButton";
 import { themeColors } from "../../commons/colors";
 import { StandardButton } from "../controls/StandardButton";
+import {scrollToTop} from "../../commons/packerObjectForm";
 
 type PackerRequestFrameProps = {
   setViewStatus: Dispatch<SetStateAction<AppViewStatus>>;
@@ -65,8 +66,6 @@ export const PackerRequestFrame = ({
 
     post("/pack", createPackerRequestBody(items, bins, true))
       .then((data: any) => {
-        console.log("Response data: ", data);
-
         try {
           packerResponseContext?.setResults(data.boxes);
           packerResponseContext?.setVisData(data.visualizeData.containers);
@@ -86,11 +85,7 @@ export const PackerRequestFrame = ({
           packerResponseContext?.setStatus(PackerJobResponseStatus.SUCCESS);
           setViewStatus(AppViewStatus.RESULTS);
 
-          console.log("packerResponseContext: ", {
-            results: packerResponseContext?.results,
-            info: packerResponseContext?.info,
-            status: packerResponseContext?.status
-          });
+          scrollToTop();
         } catch (e: any) {
           console.warn("Failed to map API response");
           if (data.message.includes("timeout")) {

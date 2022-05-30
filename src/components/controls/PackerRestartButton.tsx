@@ -9,6 +9,7 @@ import Modal from "react-bootstrap/Modal";
 import Stack from "react-bootstrap/Stack";
 import { PackerObjectContext } from "../../contexts/PackerObjectContext";
 import { StandardButton } from "./StandardButton";
+import {scrollToTop} from "../../commons/packerObjectForm";
 
 export const PackerRestartButton = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -17,6 +18,7 @@ export const PackerRestartButton = () => {
   const handleRestartButtonClick = () => {
     packerObjectContext?.clearAll();
     setShowModal(false);
+    scrollToTop();
   };
 
   return (
