@@ -6,7 +6,7 @@
 
 Webapp for calculating and finding the optimal packing solution from a range of packages/boxes and products and presenting that in a visually clear way. This is the client-side repo of the project. Relies on a private API, that project can be [found here](https://github.com/obstrom/packer-app-api).
 
-This is part of my thesis project at Stockholms Tekniska Insitut.
+__Note: This is a demo project and part of my thesis project at Stockholms Tekniska Insitut. Feel free to use this source code however you'd like, but no updates or support may be given!__
 
 Built using React.js, Typescript, React-Bootstrap, Three.js and React-three-fiber.
 Using a LAFF (Largest Area Fit First) bin packing algorithm implementation from [3d-bin-container-packing](https://github.com/skjolber/3d-bin-container-packing).
