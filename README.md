@@ -14,7 +14,7 @@ Using a LAFF (Largest Area Fit First) bin packing algorithm implementation from 
 ## Instructions
 
 ### If you wish to clone or fork and run this project yourself, this is what you need to know.
-This project needs access to [this private API](https://github.com/obstrom/packer-app-api). You can either [request an API key from me](mailto:oscar@obstrom.com) and connect against the official deployed API, or host a local copy of that project and target that.
+This project needs access to [this private API](https://github.com/obstrom/packer-app-api). I recommend hosting your own copy, or building your own custom API solution.
 
 ### Running local install
 
